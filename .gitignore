@@ -1,0 +1,16 @@
+/node_modules
+/.next
+/out
+/build
+.DS_Store
+*.pem
+npm-debug.log*
+.env*
+.vercel
+next-env.d.ts
+
+# Exclude html folder and loose html test pages
+html-site/
+test.html
+*.html
+*.html.bak
