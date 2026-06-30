@@ -1,15 +1,26 @@
 "use client";
 
+import * as React from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 import { steps } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
 
 export function ProcessSteps() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+  });
+
+  // Smoothly transform scroll progress to horizontal translation
+  const x = useTransform(scrollYProgress, [0.05, 0.85], ["0%", "-56%"]);
+
   return (
-    <section id="process" className="py-24 sm:py-32">
-      <div className="container">
-        <div className="mb-14 max-w-2xl">
+    <section ref={containerRef} id="process" className="relative h-[250vh] bg-background">
+      {/* Sticky full-screen view */}
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-12">
+        <div className="container px-6 mb-12">
           <Reveal>
             <Badge>How it works</Badge>
           </Reveal>
@@ -20,23 +31,37 @@ export function ProcessSteps() {
           />
         </div>
 
-        <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, i) => (
-            <Reveal key={step.number} index={i} as="li" className="bg-card">
-              <div className="flex h-full flex-col p-7">
-                <span className="font-display text-5xl font-semibold text-primary/30">
-                  {step.number}
-                </span>
-                <h3 className="mt-6 font-display text-lg font-semibold tracking-tight">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
+        {/* Horizontal scrollable track container */}
+        <div className="relative w-full">
+          <motion.div
+            style={{ x }}
+            className="flex gap-6 px-6 md:px-16 lg:px-24 w-max"
+          >
+            {steps.map((step, index) => (
+              <div
+                key={step.number}
+                className="w-[290px] sm:w-[360px] md:w-[420px] rounded-[2rem] border border-border bg-card/60 backdrop-blur-md p-8 md:p-10 shadow-xl flex flex-col gap-6 shrink-0 relative group hover:border-primary/40 transition-colors duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="rounded-full size-12 bg-primary text-primary-foreground text-base font-bold flex justify-center items-center shadow-md">
+                    {step.number}
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary/80">
+                    Phase {index + 1}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <h3 className="font-display text-xl md:text-2xl font-semibold leading-tight text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </div>
-            </Reveal>
-          ))}
-        </ol>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

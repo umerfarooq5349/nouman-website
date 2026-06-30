@@ -77,6 +77,7 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   const hasEntered = useRef(false);
   const directionRef = useRef<"left" | "right" | null>(null);
   const prevVisible = useRef<Set<number>>(new Set());
+  const lastScrollTimeRef = useRef(0);
 
   const totalCards = cards.length;
   const needsPagination = totalCards > MAX_VISIBLE;
@@ -255,12 +256,11 @@ export default function SocialCards({ cards }: SocialCardsProps) {
     const container = containerRef.current;
     if (!container || !needsPagination) return;
 
-    let lastScrollTime = 0;
-    const throttleMs = 500;
+    const throttleMs = 350;
 
     const handleWheel = (e: WheelEvent) => {
       const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-      if (Math.abs(delta) < 15) return;
+      if (Math.abs(delta) < 2) return;
 
       // Scroll down -> next card
       if (delta > 0) {
@@ -268,9 +268,9 @@ export default function SocialCards({ cards }: SocialCardsProps) {
           e.preventDefault(); // Lock native scroll
           e.stopPropagation(); // Stop Lenis smooth scroll
           const now = Date.now();
-          if (now - lastScrollTime >= throttleMs) {
+          if (now - lastScrollTimeRef.current >= throttleMs) {
             cycle("right");
-            lastScrollTime = now;
+            lastScrollTimeRef.current = now;
           }
         }
       }

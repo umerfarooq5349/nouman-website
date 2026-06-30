@@ -35,9 +35,10 @@ export const nav = [
 ];
 
 export const socials = [
+  { label: "Facebook", href: "https://www.facebook.com/coachnouman/" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/muhammad-nouman-gohighlevel-expert" },
-  { label: "YouTube", href: "#" }, // PLACEHOLDER — add channel URL
-  { label: "Instagram", href: "#" }, // PLACEHOLDER — add Ignitto IG URL
+  { label: "Instagram", href: "https://www.instagram.com/muhammadnouman_ghl" },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UCy1814uJCURwea7YQP_9bnA" },
 ];
 
 export const marquee = [

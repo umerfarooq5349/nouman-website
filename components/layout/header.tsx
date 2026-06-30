@@ -37,9 +37,18 @@ export function Header() {
         >
           <a
             href="/"
-            className="font-display text-lg font-semibold tracking-tight"
+            className="block"
           >
-            Muhammad<span className="text-primary">.</span>
+            <img 
+              src="/logo_light.png" 
+              alt={site.name} 
+              className="h-12 w-auto block dark:hidden object-contain" 
+            />
+            <img 
+              src="/logo_dark.png" 
+              alt={site.name} 
+              className="h-12 w-auto hidden dark:block object-contain" 
+            />
           </a>
 
           <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">

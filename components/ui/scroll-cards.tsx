@@ -105,17 +105,16 @@ function Card({
   return (
     <div
       ref={container}
-      className="sticky flex h-[65vh] md:h-[70vh] items-center justify-center px-4"
+      className="sticky flex h-[calc(100vh-80px)] items-center justify-center px-4"
       style={{
-        // Stacking visual offset
-        top: `calc(10vh + ${i * 32}px)`,
+        top: "80px",
       }}
     >
       <motion.div
         style={{
           scale,
         }}
-        className={`relative w-full max-w-4xl h-full rounded-[2.5rem] border p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-12 overflow-hidden backdrop-blur-md ${getBgClass(
+        className={`relative w-full max-w-4xl h-[65vh] md:h-[70vh] rounded-[2.5rem] border p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-12 overflow-hidden backdrop-blur-md ${getBgClass(
           color
         )}`}
       >
