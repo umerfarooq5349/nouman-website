@@ -84,7 +84,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden w-full h-[120%] pointer-events-none">
         <motion.div
           style={{ y: yBg }}
-          className="absolute inset-0 w-full h-full opacity-100 transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full opacity-30 sm:opacity-100 transition-opacity duration-300"
         >
           <img
             src="/nouman.png"

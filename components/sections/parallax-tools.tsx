@@ -126,7 +126,7 @@ export function ParallaxToolsSection() {
                 style={{
                   ...pos,
                   opacity: tool.opacity,
-                  fontSize: tool.fontSize,
+                  fontSize: `clamp(0.8rem, 2.5vw, ${tool.fontSize})`,
                   color: "hsl(var(--foreground) / 0.85)",
                 }}
                 aria-hidden="true"

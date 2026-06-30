@@ -13,8 +13,55 @@ export function ProcessSteps() {
     target: containerRef,
   });
 
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Smoothly transform scroll progress to horizontal translation
   const x = useTransform(scrollYProgress, [0.05, 0.85], ["0%", "-56%"]);
+
+  if (isMobile) {
+    return (
+      <section id="process" className="bg-background py-20 px-4">
+        <div className="container">
+          <div className="mb-12">
+            <Reveal>
+              <Badge>How it works</Badge>
+            </Reveal>
+            <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-balance">
+              From first call to a system that runs itself — in four steps.
+            </h2>
+          </div>
+
+          <div className="relative border-l border-primary/20 ml-4 pl-8 space-y-12">
+            {steps.map((step, index) => (
+              <div key={step.number} className="relative flex flex-col gap-3">
+                {/* Step Number Dot */}
+                <div className="absolute -left-[50px] top-0 rounded-full size-9 bg-primary text-primary-foreground text-sm font-bold flex justify-center items-center shadow-md border-4 border-background">
+                  {step.number}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary/80">
+                    Phase {index + 1}
+                  </span>
+                </div>
+                <h3 className="font-display text-lg font-semibold leading-tight text-foreground">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={containerRef} id="process" className="relative h-[250vh] bg-background">

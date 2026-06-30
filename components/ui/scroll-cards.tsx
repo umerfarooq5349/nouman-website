@@ -114,7 +114,7 @@ function Card({
         style={{
           scale,
         }}
-        className={`relative w-full max-w-4xl h-[65vh] md:h-[70vh] rounded-[2.5rem] border p-8 md:p-12 shadow-2xl flex flex-col md:flex-row gap-8 md:gap-12 overflow-hidden backdrop-blur-md ${getBgClass(
+        className={`relative w-full max-w-4xl h-fit md:h-[70vh] rounded-[2rem] md:rounded-[2.5rem] border p-6 md:p-12 shadow-2xl flex flex-col md:flex-row gap-6 md:gap-12 overflow-hidden backdrop-blur-md ${getBgClass(
           color
         )}`}
       >
@@ -122,31 +122,31 @@ function Card({
         <div className="flex flex-col justify-between flex-[1.2] relative z-10">
           <div>
             {tag && (
-              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-primary mb-4 bg-primary/10 px-3 py-1 rounded-full">
+              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-primary mb-3 md:mb-4 bg-primary/10 px-3 py-1 rounded-full">
                 {tag}
               </span>
             )}
-            <h3 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight">
+            <h3 className="font-display text-xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight">
               {title}
             </h3>
-            <p className={`mt-4 text-sm md:text-base lg:text-lg leading-relaxed max-w-md ${getTextColorClass(color, textColor)}`}>
+            <p className={`mt-2 md:mt-4 text-xs md:text-base lg:text-lg leading-relaxed max-w-md ${getTextColorClass(color, textColor)}`}>
               {description}
             </p>
           </div>
 
-          <div className="mt-6 md:mt-0">
+          <div className="mt-4 md:mt-0">
             <Link
               href={link}
-              className="inline-flex items-center gap-2 group text-sm md:text-base font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 group text-xs md:text-base font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
             >
               <span>View Case Study</span>
-              <ArrowUpRight className="size-4 md:size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="size-3.5 md:size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
         </div>
 
         {/* Visual section */}
-        <div className="flex-1 relative h-40 md:h-full w-full rounded-2xl overflow-hidden border border-border/20 group">
+        <div className="flex-1 relative h-36 sm:h-40 md:h-full w-full rounded-xl md:rounded-2xl overflow-hidden border border-border/20 group aspect-[16/10] md:aspect-auto">
           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300 z-10" />
           <Image
             src={src}
