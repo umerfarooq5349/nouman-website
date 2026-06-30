@@ -122,7 +122,7 @@ export function ParallaxToolsSection() {
               <span
                 key={tool.name}
                 ref={(el) => { toolEls.current[i] = el; }}
-                className="parallax-item"
+                className="parallax-item hidden md:inline-block"
                 style={{
                   ...pos,
                   opacity: tool.opacity,
