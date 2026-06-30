@@ -20,16 +20,16 @@ const HALF = 3;
 const FAN_POSITIONS = [
   { rot: -21, scale: 0.7756, x: -30, y: 7.3, zIndex: 1 },
   { rot: -14, scale: 0.8498, x: -22, y: 4.0, zIndex: 2 },
-  { rot: -7,  scale: 0.9346, x: -11, y: 1.3, zIndex: 3 },
-  { rot: 0,   scale: 1.0,    x: 0,   y: 0.0, zIndex: 10 },
-  { rot: 7,   scale: 0.9346, x: 11,  y: 1.3, zIndex: 3 },
-  { rot: 14,  scale: 0.8498, x: 22,  y: 4.0, zIndex: 2 },
-  { rot: 21,  scale: 0.7756, x: 30,  y: 7.3, zIndex: 1 },
+  { rot: -7, scale: 0.9346, x: -11, y: 1.3, zIndex: 3 },
+  { rot: 0, scale: 1.0, x: 0, y: 0.0, zIndex: 10 },
+  { rot: 7, scale: 0.9346, x: 11, y: 1.3, zIndex: 3 },
+  { rot: 14, scale: 0.8498, x: 22, y: 4.0, zIndex: 2 },
+  { rot: 21, scale: 0.7756, x: 30, y: 7.3, zIndex: 1 },
 ];
 
 function getResponsiveMultiplier(width: number) {
-  if (width < 380) return 0.20;
-  if (width < 480) return 0.22;
+  if (width < 380) return 0.18;
+  if (width < 480) return 0.20;
   if (width < 640) return 0.38;
   if (width < 768) return 0.52;
   if (width < 1024) return 0.72;
@@ -313,9 +313,9 @@ export default function SocialCards({ cards }: SocialCardsProps) {
             };
 
             return card.linkUrl ? (
-              <a key={index} href={card.linkUrl} onClick={handleClick} className="fan-card absolute left-1/2 top-1/2 cursor-pointer">{image}</a>
+              <a key={index} href={card.linkUrl} onClick={handleClick} className="fan-card absolute left-1/2 top-1/2 overflow-hidden cursor-pointer">{image}</a>
             ) : (
-              <div key={index} className="fan-card absolute left-1/2 top-1/2">{image}</div>
+              <div key={index} className="fan-card absolute left-1/2 top-1/2 overflow-hidden">{image}</div>
             );
           })}
         </div>
