@@ -1002,8 +1002,8 @@ export const FlickeringFooter = () => {
 
     return (
         <footer id="footer" className="w-full pb-0 border-t border-border mt-20">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between p-10 max-w-7xl mx-auto">
-                <div className="flex flex-col items-start justify-start gap-y-5 max-w-xs mx-0">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between p-10 max-w-7xl mx-auto gap-y-10 md:gap-y-0">
+                <div className="flex flex-col items-center text-center md:items-start md:text-left gap-y-5 max-w-xs mx-auto md:mx-0">
                     <Link href="/" className="block">
                         <img 
                             src="/logo_light.png" 
@@ -1019,28 +1019,28 @@ export const FlickeringFooter = () => {
                     <p className="tracking-tight text-muted-foreground font-medium text-sm">
                         {site.role} · Founder of Ignitto. Building done-for-you GoHighLevel systems for service businesses.
                     </p>
-                    <div className="flex items-center gap-2 dark:hidden">
+                    <div className="flex items-center justify-center md:justify-start gap-2 dark:hidden">
                         <Icons.soc2 className="size-12" />
                         <Icons.hipaa className="size-12" />
                         <Icons.gdpr className="size-12" />
                     </div>
-                    <div className="dark:flex items-center gap-2 hidden">
+                    <div className="dark:flex items-center justify-center md:justify-start gap-2 hidden">
                         <Icons.soc2Dark className="size-12" />
                         <Icons.hipaaDark className="size-12" />
                         <Icons.gdprDark className="size-12" />
                     </div>
                 </div>
-                <div className="pt-5 md:w-1/2">
-                    <div className="flex flex-col items-start justify-start md:flex-row md:items-start md:justify-end gap-x-16 gap-y-8 lg:pl-10">
+                <div className="pt-5 w-full md:w-1/2">
+                    <div className="flex flex-col items-center justify-center md:flex-row md:items-start md:justify-end gap-x-16 gap-y-8 lg:pl-10 text-center md:text-left">
                         {/* Navigate Column */}
-                        <ul className="flex flex-col gap-y-2">
+                        <ul className="flex flex-col items-center md:items-start gap-y-2">
                             <li className="mb-2 text-sm font-semibold text-primary">
                                 Navigate
                             </li>
                             {nav.map((item) => (
                                 <li
                                     key={item.href}
-                                    className="group inline-flex cursor-pointer items-center justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
+                                    className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
                                 >
                                     <Link href={item.href}>{item.label}</Link>
                                     <div className="flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
@@ -1051,14 +1051,14 @@ export const FlickeringFooter = () => {
                         </ul>
 
                         {/* Elsewhere Column */}
-                        <ul className="flex flex-col gap-y-2">
+                        <ul className="flex flex-col items-center md:items-start gap-y-2">
                             <li className="mb-2 text-sm font-semibold text-primary">
                                 Elsewhere
                             </li>
                             {socials.map((s) => (
                                 <li
                                     key={s.label}
-                                    className="group inline-flex cursor-pointer items-center justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
+                                    className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
                                 >
                                     <a href={s.href} target="_blank" rel="noopener noreferrer">
                                         {s.label}

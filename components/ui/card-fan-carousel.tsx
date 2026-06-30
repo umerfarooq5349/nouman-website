@@ -28,10 +28,10 @@ const FAN_POSITIONS = [
 ];
 
 function getResponsiveMultiplier(width: number) {
-  if (width < 380) return 0.18;
-  if (width < 480) return 0.20;
-  if (width < 640) return 0.35;
-  if (width < 768) return 0.48;
+  if (width < 380) return 0.20;
+  if (width < 480) return 0.22;
+  if (width < 640) return 0.38;
+  if (width < 768) return 0.52;
   if (width < 1024) return 0.72;
   return 1.0;
 }
@@ -295,10 +295,10 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   return (
     <section className="flex flex-col items-center w-full py-4 lg:py-8 px-4 md:px-8 relative z-20">
       <div className="flex items-center justify-center w-full max-w-[90rem]">
-        <div ref={containerRef} className="fan-layout flex relative justify-center items-center w-full max-w-[80rem] min-h-[20rem] sm:min-h-[26rem] md:min-h-[30rem]">
+        <div ref={containerRef} className="fan-layout flex relative justify-center items-center w-full max-w-[80rem] min-h-[24rem] sm:min-h-[26rem] md:min-h-[30rem]">
           {cards.map((card, index) => {
             const image = (
-              <div className="relative w-[9.2rem] h-[16rem] sm:w-[12rem] sm:h-[21rem] md:w-[15rem] md:h-[26rem] overflow-hidden rounded-2xl border border-border/40 shadow-xl bg-card">
+              <div className="relative w-[10.5rem] h-[18rem] sm:w-[12rem] sm:h-[21rem] md:w-[15rem] md:h-[26rem] overflow-hidden rounded-2xl border border-border/40 shadow-xl bg-card">
                 <img src={card.imgUrl} loading="lazy" alt={card.alt || `Card ${index}`} className="absolute inset-0 w-full h-full object-cover z-10" />
               </div>
             );

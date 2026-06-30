@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 interface ToolItem {
@@ -40,6 +40,15 @@ export function ParallaxToolsSection() {
   const logoWrapperRef = useRef<HTMLDivElement>(null);
   const toolEls = useRef<(HTMLElement | null)[]>([]);
   const revealEl = useRef<HTMLElement | null>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const logoWrapper = logoWrapperRef.current;
@@ -115,18 +124,28 @@ export function ParallaxToolsSection() {
             const pos: React.CSSProperties = {};
             if (tool.top)    pos.top    = tool.top;
             if (tool.bottom) pos.bottom = tool.bottom;
-            if (tool.left)   pos.left   = tool.left;
-            if (tool.right)  pos.right  = tool.right;
+            
+            if (isMobile) {
+              if (tool.left) {
+                pos.left = tool.left === "2%" ? "-3%" : "3%";
+              }
+              if (tool.right) {
+                pos.right = tool.right === "2%" ? "-3%" : "3%";
+              }
+            } else {
+              if (tool.left)   pos.left   = tool.left;
+              if (tool.right)  pos.right  = tool.right;
+            }
 
             return (
               <span
                 key={tool.name}
                 ref={(el) => { toolEls.current[i] = el; }}
-                className="parallax-item hidden md:inline-block"
+                className="parallax-item"
                 style={{
                   ...pos,
-                  opacity: tool.opacity,
-                  fontSize: `clamp(0.8rem, 2.5vw, ${tool.fontSize})`,
+                  opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
+                  fontSize: `clamp(0.65rem, 2.2vw, ${tool.fontSize})`,
                   color: "hsl(var(--foreground) / 0.85)",
                 }}
                 aria-hidden="true"
@@ -141,7 +160,7 @@ export function ParallaxToolsSection() {
             ref={(el) => { revealEl.current = el; }}
             className="font-heading font-medium text-center text-balance"
             style={{
-              fontSize: "clamp(1.4rem, 2.5vw, 2.1rem)",
+              fontSize: "clamp(1.1rem, 2.5vw, 2.1rem)",
               lineHeight: 1.4,
               color: "hsl(var(--primary))",
               position: "absolute",
