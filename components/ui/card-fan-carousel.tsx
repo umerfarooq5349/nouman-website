@@ -151,9 +151,9 @@ export default function SocialCards({ cards }: SocialCardsProps) {
         } else if (!wasVisible) {
           const enterX = direction === "right" ? 40 : -40;
           gsap.set(card, { x: `${enterX}rem`, y: `${y * hMult}rem`, rotation: direction === "right" ? 30 : -30, scale: 0.5, opacity: 0 });
-          gsap.to(card, { ...target, duration: 0.6, ease: "power2.out", onComplete: onCardDone });
+          gsap.to(card, { ...target, duration: 0.8, ease: "power3.out", onComplete: onCardDone });
         } else {
-          gsap.to(card, { ...target, duration: 0.5, ease: "power2.out", onComplete: onCardDone });
+          gsap.to(card, { ...target, duration: 0.7, ease: "power3.out", onComplete: onCardDone });
         }
       } else if (wasVisible) {
         const exitX = direction === "right" ? -40 : 40;
@@ -273,19 +273,8 @@ export default function SocialCards({ cards }: SocialCardsProps) {
             lastScrollTime = now;
           }
         }
-      } 
-      // Scroll up -> previous card
-      else if (delta < 0) {
-        if (centerIndex > 0) {
-          e.preventDefault(); // Lock native scroll
-          e.stopPropagation(); // Stop Lenis smooth scroll
-          const now = Date.now();
-          if (now - lastScrollTime >= throttleMs) {
-            cycle("left");
-            lastScrollTime = now;
-          }
-        }
       }
+      // Scroll up -> Page moves normally (do not preventDefault or stopPropagation)
     };
 
     container.addEventListener("wheel", handleWheel, { passive: false });
