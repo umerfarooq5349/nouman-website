@@ -39,15 +39,15 @@ export function Header() {
             href="/"
             className="block"
           >
-            <img 
-              src="/logo_light.png" 
-              alt={site.name} 
-              className="h-12 w-auto block dark:hidden object-contain" 
+            <img
+              src="/logo_light.png"
+              alt={site.name}
+              className="h-20 w-auto block dark:hidden object-contain"
             />
-            <img 
-              src="/logo_dark.png" 
-              alt={site.name} 
-              className="h-12 w-auto hidden dark:block object-contain" 
+            <img
+              src="/logo_dark.png"
+              alt={site.name}
+              className="h-20 w-auto hidden dark:block object-contain"
             />
           </a>
 

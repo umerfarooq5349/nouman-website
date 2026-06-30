@@ -1008,12 +1008,12 @@ export const FlickeringFooter = () => {
                         <img 
                             src="/logo_light.png" 
                             alt={site.name} 
-                            className="h-16 w-auto block dark:hidden object-contain" 
+                            className="h-24 w-auto block dark:hidden object-contain" 
                         />
                         <img 
                             src="/logo_dark.png" 
                             alt={site.name} 
-                            className="h-16 w-auto hidden dark:block object-contain" 
+                            className="h-24 w-auto hidden dark:block object-contain" 
                         />
                     </Link>
                     <p className="tracking-tight text-muted-foreground font-medium text-sm">
