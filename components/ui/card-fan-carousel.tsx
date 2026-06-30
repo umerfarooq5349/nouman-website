@@ -28,8 +28,8 @@ const FAN_POSITIONS = [
 ];
 
 function getResponsiveMultiplier(width: number) {
-  if (width < 380) return 0.18;
-  if (width < 480) return 0.20;
+  if (width < 380) return 0.20;
+  if (width < 480) return 0.22;
   if (width < 640) return 0.38;
   if (width < 768) return 0.52;
   if (width < 1024) return 0.72;
@@ -297,7 +297,7 @@ export default function SocialCards({ cards }: SocialCardsProps) {
   return (
     <section className="flex flex-col items-center w-full py-4 lg:py-8 px-4 md:px-8 relative z-20">
       <div className="flex items-center justify-center w-full max-w-[90rem]">
-        <div ref={containerRef} className="fan-layout flex relative justify-center items-center w-full max-w-[80rem] min-h-[24rem] sm:min-h-[26rem] md:min-h-[30rem]">
+        <div ref={containerRef} className="fan-layout flex relative justify-center items-center overflow-hidden w-full max-w-[80rem] min-h-[24rem] sm:min-h-[26rem] md:min-h-[30rem]">
           {cards.map((card, index) => {
             const image = (
               <div className="relative w-[10.5rem] h-[18rem] sm:w-[12rem] sm:h-[21rem] md:w-[15rem] md:h-[26rem] overflow-hidden rounded-2xl border border-border/40 shadow-xl bg-card">
@@ -313,16 +313,16 @@ export default function SocialCards({ cards }: SocialCardsProps) {
             };
 
             return card.linkUrl ? (
-              <a key={index} href={card.linkUrl} onClick={handleClick} className="fan-card absolute left-1/2 top-1/2 overflow-hidden cursor-pointer">{image}</a>
+              <a key={index} href={card.linkUrl} onClick={handleClick} className="fan-card absolute left-1/2 top-1/2 cursor-pointer">{image}</a>
             ) : (
-              <div key={index} className="fan-card absolute left-1/2 top-1/2 overflow-hidden">{image}</div>
+              <div key={index} className="fan-card absolute left-1/2 top-1/2">{image}</div>
             );
           })}
         </div>
       </div>
 
       {needsPagination && (
-        <div className="flex items-center justify-center gap-4 mt-8 md:mt-12 z-30">
+        <div className="flex items-center justify-center gap-4 mt-8 md:mt-12 z-30 ">
           <button className={`${ARROW_CLASSES} w-10 h-10 md:w-12 md:h-12`} onClick={() => cycle("left")} aria-label="Previous">
             {chevron("left")}
           </button>

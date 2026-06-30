@@ -39,7 +39,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   const toolsMarquee = [...tools, ...tools];
 
   return (
-    <div className="relative min-h-screen bg-[#0c0f0a] text-[#F7F4D5] pb-24 pt-32 overflow-hidden">
+    <div className="relative min-h-screen bg-background text-foreground pb-24 pt-32 overflow-hidden">
       
       {/* ─── Premium King Kong Stripes Background ─── */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -47,7 +47,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         <div 
           className="absolute inset-0 opacity-[0.04]"
           style={{
-            backgroundImage: "linear-gradient(90deg, #F7F4D5 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)",
             backgroundSize: "12.5% 100%",
           }}
         />
@@ -124,7 +124,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             {marqueeItems.map((item, i) => (
               <span
                 key={i}
-                className="font-display text-sm font-bold tracking-widest text-[#F7F4D5]/35 flex items-center gap-3"
+                className="font-display text-sm font-bold tracking-widest text-foreground/35 flex items-center gap-3"
               >
                 <div className="size-2 rounded-full bg-primary" />
                 {item}
@@ -273,9 +273,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <div className="w-full h-48 relative">
               <svg viewBox="0 0 400 150" className="w-full h-full stroke-primary fill-none overflow-visible">
                 {/* Horizontal guide lines */}
-                <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(247, 244, 213, 0.06)" strokeWidth="1" />
-                <line x1="0" y1="70" x2="400" y2="70" stroke="rgba(247, 244, 213, 0.06)" strokeWidth="1" />
-                <line x1="0" y1="120" x2="400" y2="120" stroke="rgba(247, 244, 213, 0.06)" strokeWidth="1" />
+                <line x1="0" y1="20" x2="400" y2="20" stroke="hsl(var(--foreground) / 0.08)" strokeWidth="1" />
+                <line x1="0" y1="70" x2="400" y2="70" stroke="hsl(var(--foreground) / 0.08)" strokeWidth="1" />
+                <line x1="0" y1="120" x2="400" y2="120" stroke="hsl(var(--foreground) / 0.08)" strokeWidth="1" />
 
                 {/* Graph Curve */}
                 <motion.path
