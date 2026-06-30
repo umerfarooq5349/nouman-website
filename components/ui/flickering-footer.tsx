@@ -1043,7 +1043,7 @@ export const FlickeringFooter = () => {
                                     className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
                                 >
                                     <Link href={item.href}>{item.label}</Link>
-                                    <div className="flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                    <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
                                         <ChevronRightIcon className="h-4 w-4" />
                                     </div>
                                 </li>
@@ -1063,7 +1063,7 @@ export const FlickeringFooter = () => {
                                     <a href={s.href} target="_blank" rel="noopener noreferrer">
                                         {s.label}
                                     </a>
-                                    <div className="flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                    <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
                                         <ChevronRightIcon className="h-4 w-4" />
                                     </div>
                                 </li>
