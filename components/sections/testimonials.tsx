@@ -1,14 +1,28 @@
 "use client";
 
-import { Star } from "lucide-react";
 import { testimonials } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
+import { AnimatedTestimonials } from "@/components/ui/testimonial";
 
 export function Testimonials() {
+  const mappedTestimonials = testimonials.map((t, idx) => {
+    const srcs = [
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=400&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop",
+    ];
+    return {
+      quote: t.quote,
+      name: t.name,
+      designation: t.title,
+      src: srcs[idx % srcs.length],
+    };
+  });
+
   return (
-    <section id="testimonials" className="relative bg-muted/35 border-y border-border/50 py-24 sm:py-32">
+    <section id="testimonials" className="relative bg-muted/35 border-y border-border/50 py-24 sm:py-32 overflow-hidden">
       <div className="container">
         <div className="mb-14 max-w-2xl">
           <Reveal>
@@ -21,30 +35,7 @@ export function Testimonials() {
           />
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal key={i} index={i}>
-              <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-7">
-                <div className="flex gap-0.5" aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star
-                      key={s}
-                      className="size-4 fill-primary text-primary"
-                      aria-hidden
-                    />
-                  ))}
-                </div>
-                <blockquote className="mt-5 flex-1 text-[15px] leading-relaxed text-foreground/90">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-6 border-t border-border pt-4">
-                  <p className="font-medium">{t.name}</p>
-                  <p className="text-sm text-muted-foreground">{t.title}</p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
+        <AnimatedTestimonials testimonials={mappedTestimonials} autoplay={true} />
       </div>
     </section>
   );
