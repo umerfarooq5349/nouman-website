@@ -38,13 +38,13 @@ function ServiceCard({ service, index, className }: ServiceCardProps) {
       initial={{ opacity: 0, x: initialX, y: initialY }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       <article
         onMouseMove={handleMouseMove}
         data-cursor
-        className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-7 transition-shadow duration-300 hover:glow-border"
+        className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-500 hover:border-primary/50 hover:glow-border hover:shadow-lg hover:shadow-primary/5"
       >
         {/* Dynamic Glow Spotlight */}
         <motion.div
