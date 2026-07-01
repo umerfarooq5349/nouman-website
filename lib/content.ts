@@ -104,6 +104,43 @@ export const services: Service[] = [
     description:
       "Targeted lists and sending infrastructure built to run at real scale.",
     icon: Target,
+    span: "wide",
+  },
+  {
+    title: "SMS & Email Marketing",
+    description:
+      "Campaigns and nurture sequences that bring quiet leads back to life.",
+    icon: MessageSquare,
+  }, {
+    title: "GHL Setup & CRM Automation",
+    description:
+      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
+    icon: Workflow,
+  },
+  {
+    title: "Funnels & Websites",
+    description:
+      "High-converting funnels and sites built inside GoHighLevel and ready to capture.",
+    icon: LayoutTemplate,
+    span: "wide",
+  },
+  {
+    title: "Cold Email & LinkedIn Outreach",
+    description:
+      "Done-for-you outbound that fills your calendar without you lifting a finger.",
+    icon: Send,
+  },
+  {
+    title: "AI Chatbots",
+    description:
+      "Conversation AI that answers leads and books appointments around the clock.",
+    icon: Bot,
+  },
+  {
+    title: "Lead Generation",
+    description:
+      "Targeted lists and sending infrastructure built to run at real scale.",
+    icon: Target,
   },
   {
     title: "SMS & Email Marketing",
