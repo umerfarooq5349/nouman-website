@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,9 +28,9 @@ export function CardsParallax({ items }: CardsParallaxProps) {
   });
 
   return (
-    <div ref={container} className="relative flex flex-col gap-12 py-12">
+    <div ref={container} className="relative flex flex-col gap-8 md:gap-16 py-8 md:py-16">
       {items.map((project, i) => {
-        const targetScale = 1 - (items.length - i) * 0.05;
+        const targetScale = 1 - (items.length - i) * 0.04;
         return (
           <Card
             key={`c_${i}`}
@@ -67,94 +67,112 @@ function Card({
   targetScale,
 }: CardProps) {
   const container = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
   
   // Scale down the card as we scroll further down the container
   const scale = useTransform(progress, range, [1, targetScale]);
+  const scaleVal = isDesktop ? scale : 1;
 
-  // Color mapping mapping standard color names to premium, polished Tailwind CSS classes
-  const getBgClass = (colorName: string) => {
+  // Modern brand-specific styling configuration
+  const getBrandConfig = (colorName: string) => {
     switch (colorName.toLowerCase()) {
-      case "white":
       case "beige":
-        return "bg-[#F7F4D5] border-border/80 text-[#812510] dark:bg-zinc-900/90 dark:border-zinc-800/80";
-      case "green":
+        return {
+          glow: "bg-amber-500/10 dark:bg-amber-500/5",
+          border: "hover:border-amber-500/30",
+          tagBg: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+        };
       case "moss-green":
-        return "bg-[#839958] border-[#F7F4D5]/20 text-[#F7F4D5] dark:bg-emerald-950/80";
-      case "black":
+        return {
+          glow: "bg-emerald-500/10 dark:bg-emerald-500/5",
+          border: "hover:border-emerald-500/30",
+          tagBg: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+        };
       case "rosy-brown":
-        return "bg-[#D3968C] border-amber-900/20 text-[#812510] dark:bg-zinc-950/95";
-      case "saffron":
-      case "orange":
-        return "bg-[#FFC64F] border-[#839958]/20 text-[#812510] dark:bg-amber-950/80";
-      case "indigo":
-      case "blue":
+        return {
+          glow: "bg-rose-500/10 dark:bg-rose-500/5",
+          border: "hover:border-rose-500/30",
+          tagBg: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+        };
       case "moonstone":
-        return "bg-[#519CAB] border-zinc-800 text-white dark:bg-indigo-950/80";
+        return {
+          glow: "bg-cyan-500/10 dark:bg-cyan-500/5",
+          border: "hover:border-cyan-500/30",
+          tagBg: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
+        };
       default:
-        return "bg-card border-border";
+        return {
+          glow: "bg-primary/10 dark:bg-primary/5",
+          border: "hover:border-primary/30",
+          tagBg: "bg-primary/10 text-primary",
+        };
     }
   };
 
-  const getTextColorClass = (colorName: string, textCol: string) => {
-    if (colorName.toLowerCase() === "black" || textCol.toLowerCase() === "white") {
-      return "text-zinc-400";
-    }
-    return "text-muted-foreground";
-  };
+  const brand = getBrandConfig(color);
 
   return (
     <div
       ref={container}
-      className="sticky flex h-[calc(100vh-80px)] items-center justify-center px-4"
+      className="relative md:sticky flex h-fit md:h-[80vh] items-center justify-center px-4 py-4 md:py-0"
       style={{
-        top: "80px",
+        top: isDesktop ? "100px" : "auto",
       }}
     >
       <motion.div
         style={{
-          scale,
+          scale: scaleVal,
         }}
-        className={`relative w-full max-w-4xl h-fit md:h-[70vh] rounded-[2rem] md:rounded-[2.5rem] border p-6 md:p-12 shadow-2xl flex flex-col md:flex-row gap-6 md:gap-12 overflow-hidden backdrop-blur-md ${getBgClass(
-          color
-        )}`}
+        className={`relative w-full max-w-5xl h-fit md:h-[55vh] rounded-[2rem] md:rounded-[2.5rem] border border-border/80 bg-card/60 dark:bg-card/35 backdrop-blur-md p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-10 overflow-hidden transition-all duration-300 ${brand.border}`}
       >
+        {/* Soft Ambient Brand Glow */}
+        <div className={`absolute -right-24 -bottom-24 w-80 h-80 rounded-full blur-3xl pointer-events-none z-0 ${brand.glow}`} />
+
         {/* Details section */}
-        <div className="flex flex-col justify-between flex-[1.2] relative z-10">
+        <div className="flex flex-col justify-between flex-[1.1] relative z-10">
           <div>
             {tag && (
-              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-primary mb-3 md:mb-4 bg-primary/10 px-3 py-1 rounded-full">
+              <span className={`inline-block text-xs font-semibold uppercase tracking-wider mb-3 md:mb-4 px-3 py-1 rounded-full ${brand.tagBg}`}>
                 {tag}
               </span>
             )}
-            <h3 className="font-display text-xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight">
+            <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight">
               {title}
             </h3>
-            <p className={`mt-2 md:mt-4 text-xs md:text-base lg:text-lg leading-relaxed max-w-md ${getTextColorClass(color, textColor)}`}>
+            <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground max-w-md">
               {description}
             </p>
           </div>
 
-          <div className="mt-4 md:mt-0">
+          <div className="mt-6 md:mt-0">
             <Link
               href={link}
-              className="inline-flex items-center gap-2 group text-xs md:text-base font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 group text-sm md:text-base font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
             >
               <span>View Case Study</span>
-              <ArrowUpRight className="size-3.5 md:size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="size-4 md:size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
         </div>
 
         {/* Visual section */}
-        <div className="flex-1 relative h-36 sm:h-40 md:h-full w-full rounded-xl md:rounded-2xl overflow-hidden border border-border/20 group aspect-[16/10] md:aspect-auto">
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300 z-10" />
+        <div className="flex-1 relative h-48 sm:h-56 md:h-full w-full rounded-xl md:rounded-2xl overflow-hidden border border-border/20 group aspect-[16/10] md:aspect-auto">
+          <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-300 z-10" />
           <Image
             src={src}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             priority={i === 0}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-103"
           />
         </div>
       </motion.div>
