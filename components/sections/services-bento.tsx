@@ -112,7 +112,7 @@ export function ServicesBento() {
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense">
           {services.map((service, i) => (
             <ServiceCard
               key={service.title}
