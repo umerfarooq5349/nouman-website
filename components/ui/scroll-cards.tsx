@@ -81,6 +81,10 @@ function Card({
   const scale = useTransform(progress, range, [1, targetScale]);
   const scaleVal = isDesktop ? scale : 1;
 
+  // Parallax translation to slide card up/down immediately on scroll
+  const y = useTransform(progress, range, [0, -120]);
+  const yVal = isDesktop ? y : 0;
+
   // Modern brand-specific styling configuration
   const getBrandConfig = (colorName: string) => {
     switch (colorName.toLowerCase()) {
@@ -130,6 +134,7 @@ function Card({
       <motion.div
         style={{
           scale: scaleVal,
+          y: yVal,
         }}
         className={`relative w-full max-w-5xl h-fit md:h-[55vh] rounded-[2rem] md:rounded-[2.5rem] border border-border/80 bg-card/60 dark:bg-card/35 backdrop-blur-md p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-10 overflow-hidden transition-all duration-300 ${brand.border}`}
       >
