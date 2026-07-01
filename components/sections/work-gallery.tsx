@@ -12,6 +12,8 @@ export function WorkGallery() {
     imgUrl: project.src,
     alt: project.title,
     linkUrl: project.href || "#",
+    title: project.title,
+    category: project.niche,
   }));
 
   const cardItems = projects.map((project) => ({

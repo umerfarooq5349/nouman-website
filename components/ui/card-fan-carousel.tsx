@@ -8,6 +8,8 @@ export interface CardItem {
   imgUrl: string;
   alt?: string;
   linkUrl?: string;
+  title?: string;
+  category?: string;
 }
 
 interface SocialCardsProps {
@@ -301,7 +303,28 @@ export default function SocialCards({ cards }: SocialCardsProps) {
           {cards.map((card, index) => {
             const image = (
               <div className="relative w-[10.5rem] h-[18rem] sm:w-[12rem] sm:h-[21rem] md:w-[15rem] md:h-[26rem] overflow-hidden rounded-2xl border border-border/40 shadow-xl bg-card">
-                <img src={card.imgUrl} loading="lazy" alt={card.alt || `Card ${index}`} className="absolute inset-0 w-full h-full object-cover z-10" />
+                <img 
+                  src={card.imgUrl} 
+                  loading="lazy" 
+                  alt={card.alt || `Card ${index}`} 
+                  className="absolute inset-0 w-full h-full object-cover z-10 group-hover:opacity-40 transition-opacity duration-500" 
+                />
+                {/* Hover Details Overlay */}
+                {(card.title || card.category) && (
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-between p-4 text-white">
+                    <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary">
+                      {card.category}
+                    </span>
+                    <div className="flex flex-col gap-2">
+                      <h4 className="font-display text-xs sm:text-sm md:text-base font-bold leading-tight line-clamp-2">
+                        {card.title}
+                      </h4>
+                      <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold text-primary-foreground bg-primary px-2.5 py-1 rounded-md w-fit shadow-md">
+                        View
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             );
 
@@ -313,9 +336,9 @@ export default function SocialCards({ cards }: SocialCardsProps) {
             };
 
             return card.linkUrl ? (
-              <a key={index} href={card.linkUrl} onClick={handleClick} className="fan-card absolute left-1/2 top-1/2 cursor-pointer">{image}</a>
+              <a key={index} href={card.linkUrl} onClick={handleClick} className="group fan-card absolute left-1/2 top-1/2 overflow-hidden cursor-pointer">{image}</a>
             ) : (
-              <div key={index} className="fan-card absolute left-1/2 top-1/2">{image}</div>
+              <div key={index} className="group fan-card absolute left-1/2 top-1/2 overflow-hidden">{image}</div>
             );
           })}
         </div>
