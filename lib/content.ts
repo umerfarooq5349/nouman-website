@@ -75,10 +75,10 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: "GHL Setup & CRM Automation",
+    title: "Lead Generation",
     description:
-      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
-    icon: Workflow,
+      "Targeted lists and sending infrastructure built to run at real scale.",
+    icon: Target,
     span: "wide",
   },
   {
@@ -100,10 +100,10 @@ export const services: Service[] = [
     icon: Bot,
   },
   {
-    title: "Lead Generation",
+    title: "GHL Setup & CRM Automation",
     description:
-      "Targeted lists and sending infrastructure built to run at real scale.",
-    icon: Target,
+      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
+    icon: Workflow,
     span: "wide",
   },
   {
@@ -112,10 +112,10 @@ export const services: Service[] = [
       "Campaigns and nurture sequences that bring quiet leads back to life.",
     icon: MessageSquare,
   }, {
-    title: "GHL Setup & CRM Automation",
+    title: "Lead Generation",
     description:
-      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
-    icon: Workflow,
+      "Targeted lists and sending infrastructure built to run at real scale.",
+    icon: Target,
   },
   {
     title: "Funnels & Websites",
@@ -137,10 +137,10 @@ export const services: Service[] = [
     icon: Bot,
   },
   {
-    title: "Lead Generation",
+    title: "GHL Setup & CRM Automation",
     description:
-      "Targeted lists and sending infrastructure built to run at real scale.",
-    icon: Target,
+      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
+    icon: Workflow,
   },
   {
     title: "SMS & Email Marketing",
