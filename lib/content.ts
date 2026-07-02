@@ -6,6 +6,22 @@ import {
   Bot,
   Target,
   MessageSquare,
+  Users,
+  BookOpen,
+  Layers,
+  Globe,
+  Cpu,
+  FileText,
+  Mail,
+  Database,
+  Calendar,
+  Lock,
+  Copy,
+  PhoneCall,
+  Share2,
+  Link2,
+  PenTool,
+  Blocks,
 } from "lucide-react";
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -75,78 +91,117 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: "Lead Generation",
+    title: "GHL Client Onboarding",
     description:
-      "Targeted lists and sending infrastructure built to run at real scale.",
+      "Boost your business with a friendly GoHighLevel (GHL) onboarding! Get the personalized support you need to make your operations smoother and more efficient. If you've built your own branded white-label SMMA or SaaS on GoHighLevel, I can help onboard your clients and act as your brand expert to ensure their success.",
+    icon: Users,
+    span: "wide",
+  },
+  {
+    title: "GHL Mentoring and Consultation",
+    description:
+      "Learning GoHighLevel doesn’t have to be tough! I’m here to make it easy for you. With my mentoring and consultation, you’ll discover how to use this powerful platform to grow your business. GoHighLevel can transform your operations, but knowing how to implement it is essential. Let me help you navigate the process and unlock its full potential!",
+    icon: BookOpen,
+  },
+  {
+    title: "High-Converting Sales Funnels",
+    description:
+      "I can help you boost your business with high-converting sales funnels using GoHighLevel! I create easy and effective customer journeys that turn curious visitors into loyal customers. With my funnels, you’ll see more sales and higher revenue. Let’s work together to grow your business and achieve your goals!",
+    icon: Layers,
+  },
+  {
+    title: "GHL Website Design",
+    description:
+      "I can help you create more than just a website; I build a strong online presence! With my GoHighLevel website design services, you’ll get a site that not only looks great but also drives results. Let’s work together to bring your vision to life and make your online presence shine!",
+    icon: LayoutTemplate,
+  },
+  {
+    title: "AI-Powered Automation",
+    description:
+      "I can help you harness the power of AI to automate your customer interactions with smart chatbots. Plus, my workflow automations simplify your business operations. From nurturing leads to managing tasks, I create customized solutions that save you time and enhance your customer experience. Let’s make your business more efficient together!",
+    icon: Cpu,
+    span: "wide",
+  },
+  {
+    title: "Advanced Workflows & Automation",
+    description:
+      "I can help you simplify complex tasks by automating your pipelines and business requirements with GoHighLevel workflows. I design automations that handle if-else logic, wait times, and more, ensuring everything runs smoothly and efficiently. Let’s boost your productivity by making your workflows work for you!",
+    icon: Workflow,
+  },
+  {
+    title: "Optimized Landing Pages",
+    description:
+      "I can help you create landing pages that captivate and convert! With my expertise, I design high-performance, engaging landing pages that unlock your business potential and drive real results. Let’s work together to turn your visitors into loyal customers!",
+    icon: FileText,
+  },
+  {
+    title: "Email Automation",
+    description:
+      "I can help you keep your audience engaged with smart email automation! I create automated email sequences that nurture leads, deliver timely content, and build lasting customer relationships—all while saving you time and effort. Let’s streamline your communication and boost your business together!",
+    icon: Mail,
+    span: "wide",
+  },
+  {
+    title: "Migration to GoHighlevel",
+    description:
+      "I can help you migrate to GoHighLevel securely and effortlessly! We ensure a smooth, hassle-free migration from platforms like HubSpot, Keap, Kajabi, and Salesforce, with no downtime. You can focus on what matters most while we handle the transition for you. Let’s make your move to GoHighLevel seamless!",
+    icon: Database,
+  },
+  {
+    title: "Calendar Setup and Domain Integration",
+    description:
+      "I can handle your calendar and domain integrations for smooth scheduling and management. I set up calendars that sync perfectly with your workflow, making appointment booking a breeze for you and your clients. Plus, I ensure your domain configurations are secure and ready for your websites. Let’s streamline your operations together!",
+    icon: Calendar,
+  },
+  {
+    title: "Membership Site Creation",
+    description:
+      "I can help you create exclusive membership sites where you can offer premium content, courses, or other gated materials. I build strong membership platforms within GoHighLevel, making it easy for you to manage subscriptions, control content access, and engage with your members. Let’s bring your membership vision to life!",
+    icon: Lock,
+  },
+  {
+    title: "GHL Snapshot",
+    description:
+      "I can help you with easy and hassle-free GoHighLevel snapshot setup, whether you’re migrating from another platform, backing up your existing data, or have purchased a pre-built snapshot for your niche. My GoHighlevel Snapshot setup services ensure that your workflows, funnels, and settings are smoothly transferred and preserved. Let’s quickly set you up for success with prebuilt snapshots!",
+    icon: Copy,
+    span: "wide",
+  },
+  {
+    title: "Phone & Text Messaging System A2P 10DLC Registration",
+    description:
+      "I can enhance your communication by integrating phone and text messaging systems directly into GoHighLevel. I’ll set up and configure your phone and SMS channels while ensuring compliance with A2P 10DLC regulations. This makes it easy for you to manage calls and messages right from your CRM, ensuring seamless client interactions and smooth, compliant communication.",
+    icon: PhoneCall,
+  },
+  {
+    title: "Social Media Integration",
+    description:
+      "I can help you connect all your social media platforms to GoHighLevel for centralized management. By integrating your social channels, you can post, track, and engage with your audience without the hassle of switching between multiple platforms. This streamlines your marketing efforts and helps you stay connected with your audience more effectively.",
+    icon: Share2,
+  },
+  {
+    title: "GHL CRM and Pipeline for Lead Generation",
+    description:
+      "Transform your lead generation process with GoHighLevel’s CRM and pipeline setup. I can help you effectively capture, track, and nurture leads through a customized pipeline designed for your business needs. With streamlined workflows and powerful automation, you can maximize opportunities and convert more leads into loyal customers, driving your business growth forward.",
     icon: Target,
     span: "wide",
   },
   {
-    title: "Funnels & Websites",
+    title: "Facebook Ads Lead Mapping to GHL CRM",
     description:
-      "High-converting funnels and sites built inside GoHighLevel and ready to capture.",
-    icon: LayoutTemplate,
+      "Automatically sync leads generated through Facebook ads directly into your GoHighLevel CRM. I can configure your systems to ensure seamless lead mapping, allowing you to nurture and convert leads with ease while improving ad campaign performance.",
+    icon: Link2,
   },
   {
-    title: "Cold Email & LinkedIn Outreach",
+    title: "Branding, Compelling Copy & Brand Messaging",
     description:
-      "Done-for-you outbound that fills your calendar without you lifting a finger.",
-    icon: Send,
+      "Enhance your brand identity with compelling copy and messaging that reflects your unique vision. I create persuasive content that aligns with your brand’s color scheme, logo, and overall aesthetic. Whether for email campaigns, SMS, or landing pages, I ensure your messaging resonates with your audience and strengthens your brand presence, driving engagement and action.",
+    icon: PenTool,
   },
   {
-    title: "AI Chatbots",
+    title: "GHL Integration with Third-Party Apps",
     description:
-      "Conversation AI that answers leads and books appointments around the clock.",
-    icon: Bot,
-  },
-  {
-    title: "GHL Setup & CRM Automation",
-    description:
-      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
-    icon: Workflow,
-    span: "wide",
-  },
-  {
-    title: "SMS & Email Marketing",
-    description:
-      "Campaigns and nurture sequences that bring quiet leads back to life.",
-    icon: MessageSquare,
-  }, {
-    title: "Lead Generation",
-    description:
-      "Targeted lists and sending infrastructure built to run at real scale.",
-    icon: Target,
-  },
-  {
-    title: "Funnels & Websites",
-    description:
-      "High-converting funnels and sites built inside GoHighLevel and ready to capture.",
-    icon: LayoutTemplate,
-    span: "wide",
-  },
-  {
-    title: "Cold Email & LinkedIn Outreach",
-    description:
-      "Done-for-you outbound that fills your calendar without you lifting a finger.",
-    icon: Send,
-  },
-  {
-    title: "AI Chatbots",
-    description:
-      "Conversation AI that answers leads and books appointments around the clock.",
-    icon: Bot,
-  },
-  {
-    title: "GHL Setup & CRM Automation",
-    description:
-      "Your whole account built right: pipelines, calendars, workflows, and automations wired so leads never fall through the cracks.",
-    icon: Workflow,
-  },
-  {
-    title: "SMS & Email Marketing",
-    description:
-      "Campaigns and nurture sequences that bring quiet leads back to life.",
-    icon: MessageSquare,
+      "Seamlessly connect your favorite third-party apps with GoHighLevel to enhance your business operations. I can help you integrate platforms using GoHighLevel webhooks, Zapier, and Pabbly, ensuring that your systems work together smoothly. This integration allows you to automate processes, synchronize data, and improve overall efficiency, enabling you to focus on what matters most—growing your business.",
+    icon: Blocks,
     span: "wide",
   },
 ];
