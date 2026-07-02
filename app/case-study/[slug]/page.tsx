@@ -440,3 +440,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  return Object.keys(caseStudies).map((slug) => ({
+    slug,
+  }));
+}
