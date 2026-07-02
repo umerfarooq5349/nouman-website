@@ -16,23 +16,23 @@ interface ToolItem {
 
 // Placed in distinct Left (left: 2% or 10%) and Right (right: 2% or 10%) zones to keep the center completely empty
 const tools: ToolItem[] = [
-  // Left Side (Alternating Outer/Inner)
-  { name: "Stripe",         speed: 0.11, opacity: 0.75, fontSize: "1.9rem",  top: "5%",     left: "2%" },
-  { name: "Google Ads",     speed: 0.07, opacity: 0.55, fontSize: "1.6rem",  top: "18%",    left: "10%" },
-  { name: "GoHighLevel",    speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "31%",    left: "2%" },
-  { name: "Meta Ads",       speed: 0.08, opacity: 0.55, fontSize: "1.65rem", top: "44%",    left: "10%" },
-  { name: "ActiveCampaign", speed: 0.05, opacity: 0.30, fontSize: "1.3rem",  top: "57%",    left: "2%" },
-  { name: "Mailchimp",      speed: 0.04, opacity: 0.30, fontSize: "1.4rem",  top: "70%",    left: "10%" },
-  { name: "Twilio",         speed: 0.14, opacity: 0.75, fontSize: "2.2rem",  top: "83%",    left: "2%" },
-  { name: "HubSpot",        speed: 0.02, opacity: 0.18, fontSize: "1.1rem",  top: "95%",    left: "10%" },
-
-  // Right Side (Alternating Inner/Outer)
-  { name: "Typeform",       speed: 0.03, opacity: 0.18, fontSize: "1.0rem",  top: "10%",    right: "10%" },
-  { name: "Airtable",       speed: 0.02, opacity: 0.18, fontSize: "1.1rem",  top: "26%",    right: "2%" },
-  { name: "Make.com",       speed: 0.13, opacity: 0.75, fontSize: "2.1rem",  top: "42%",    right: "10%" },
-  { name: "Zapier",         speed: 0.18, opacity: 1.0,  fontSize: "2.5rem",  top: "58%",    right: "2%" },
-  { name: "Pipedrive",      speed: 0.04, opacity: 0.30, fontSize: "1.3rem",  top: "74%",    right: "10%" },
-  { name: "Calendly",       speed: 0.09, opacity: 0.55, fontSize: "1.75rem", top: "90%",    right: "2%" },
+  { name: "Stripe",         speed: 0.11, opacity: 0.75, fontSize: "1.9rem",  top: "8%",  left: "8%" },
+  { name: "Airtable",       speed: 0.02, opacity: 0.40, fontSize: "1.2rem",  top: "20%", left: "30%" },
+  { name: "Zapier",         speed: 0.18, opacity: 1.0,  fontSize: "2.5rem",  top: "5%",  left: "45%" },
+  { name: "Google Ads",     speed: 0.07, opacity: 0.55, fontSize: "1.6rem",  top: "9%",  left: "80%" },
+  
+  { name: "Twilio",         speed: 0.14, opacity: 0.75, fontSize: "2.2rem",  top: "28%", left: "18%" },
+  { name: "GoHighLevel",    speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "32%", left: "48%" },
+  { name: "Meta Ads",       speed: 0.08, opacity: 0.55, fontSize: "1.65rem", top: "29%", left: "76%" },
+  
+  { name: "ActiveCampaign", speed: 0.05, opacity: 0.45, fontSize: "1.3rem",  top: "54%", left: "5%" },
+  { name: "Typeform",       speed: 0.03, opacity: 0.35, fontSize: "1.1rem",  top: "56%", left: "45%" },
+  { name: "HubSpot",        speed: 0.10, opacity: 0.60, fontSize: "1.5rem",  top: "50%", left: "85%" },
+  
+  { name: "Make.com",       speed: 0.13, opacity: 0.75, fontSize: "2.1rem",  top: "78%", left: "12%" },
+  { name: "Pipedrive",      speed: 0.04, opacity: 0.45, fontSize: "1.3rem",  top: "68%", left: "28%" },
+  { name: "Mailchimp",      speed: 0.04, opacity: 0.50, fontSize: "1.4rem",  top: "82%", left: "50%" },
+  { name: "Calendly",       speed: 0.09, opacity: 0.65, fontSize: "1.75rem", top: "79%", left: "82%" },
 ];
 
 export function ParallaxToolsSection() {
@@ -60,10 +60,10 @@ export function ParallaxToolsSection() {
       const wh = window.innerHeight;
 
       // Exact formula from test.html
-      const total   = logoWrapper.offsetHeight + wh;
+      const total = logoWrapper.offsetHeight + wh;
       const scrolled = wh - rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / total));
-      const range   = logoWrapper.offsetHeight;
+      const range = logoWrapper.offsetHeight;
 
       toolEls.current.forEach((el, i) => {
         if (!el) return;
@@ -122,19 +122,16 @@ export function ParallaxToolsSection() {
         >
           {tools.map((tool, i) => {
             const pos: React.CSSProperties = {};
-            if (tool.top)    pos.top    = tool.top;
+            if (tool.top) pos.top = tool.top;
             if (tool.bottom) pos.bottom = tool.bottom;
-            
-            if (isMobile) {
-              if (tool.left) {
-                pos.left = tool.left === "2%" ? "-3%" : "3%";
-              }
-              if (tool.right) {
-                pos.right = tool.right === "2%" ? "-3%" : "3%";
-              }
-            } else {
-              if (tool.left)   pos.left   = tool.left;
-              if (tool.right)  pos.right  = tool.right;
+
+            if (isMobile && tool.left) {
+              const val = parseFloat(tool.left);
+              pos.left = `${(val * 0.7 + 15).toFixed(1)}%`;
+              pos.transform = "translateX(-50%)"; // Center aligned anchor
+            } else if (tool.left) {
+              pos.left = tool.left;
+              pos.transform = "translateX(-50%)"; // Center aligned anchor
             }
 
             return (

@@ -85,9 +85,9 @@ export const Card = ({
         boxShadow:
           "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
       }}
-      className="max-w-6xl -mt-6 md:-mt-12 mx-auto h-[35rem] md:h-[45rem] w-full rounded-[30px] p-[3px] bg-gradient-to-r from-[#FFC64F] via-[#519CAB] to-[#EF4444] shadow-2xl backdrop-blur-md animate-gradient"
+      className="max-w-6xl -mt-6 md:-mt-12 mx-auto h-[35rem] md:h-[45rem] w-full border-4 border-border bg-card/90 rounded-[30px] p-2 md:p-6 shadow-2xl backdrop-blur-md"
     >
-      <div className="h-full w-full overflow-y-auto rounded-[27px] bg-background/95 dark:bg-background/85 p-4 sm:p-6 md:p-8 scrollbar-thin scrollbar-thumb-primary/20 hover:scrollbar-thumb-primary/40 scrollbar-track-transparent">
+      <div className="h-full w-full overflow-y-auto rounded-2xl bg-background/50 dark:bg-background/25 md:rounded-2xl p-4 sm:p-6 md:p-8 scrollbar-thin scrollbar-thumb-primary/20 hover:scrollbar-thumb-primary/40 scrollbar-track-transparent">
         {children}
       </div>
     </motion.div>
