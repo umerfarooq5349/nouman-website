@@ -49,9 +49,9 @@ export function WorkGallery() {
         </div>
 
         {/* Dynamic Card Fan Gallery */}
-        <div className="w-full flex justify-center py-6 mb-20 overflow-hidden">
+        {/* <div className="w-full flex justify-center py-6 mb-20 overflow-hidden">
           <SocialCards cards={fannedCards} />
-        </div>
+        </div> */}
 
         {/* Spacing / Divider */}
         <div className="border-t border-border/40 my-16 pt-16">

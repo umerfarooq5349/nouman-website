@@ -831,12 +831,12 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     }, [totalSquares]);
 
     return (
-        <div 
+        <div
             className={cn("relative w-full h-full overflow-hidden flex items-center justify-center bg-transparent", className)}
             {...props}
         >
             {/* Grid Container */}
-            <div 
+            <div
                 className="absolute inset-0 grid w-full h-full opacity-30 select-none pointer-events-none justify-items-center align-middle"
                 style={{
                     gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
@@ -1005,15 +1005,15 @@ export const FlickeringFooter = () => {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between p-10 max-w-7xl mx-auto gap-y-10 md:gap-y-0">
                 <div className="flex flex-col items-center text-center md:items-start md:text-left gap-y-5 max-w-xs mx-auto md:mx-0">
                     <Link href="/" className="block">
-                        <img 
-                            src="/logo_light.png" 
-                            alt={site.name} 
-                            className="h-24 w-auto block dark:hidden object-contain" 
+                        <img
+                            src="/logo_light.png"
+                            alt={site.name}
+                            className="h-24 w-auto block dark:hidden object-contain"
                         />
-                        <img 
-                            src="/logo_dark.png" 
-                            alt={site.name} 
-                            className="h-24 w-auto hidden dark:block object-contain" 
+                        <img
+                            src="/logo_dark.png"
+                            alt={site.name}
+                            className="h-24 w-auto hidden dark:block object-contain"
                         />
                     </Link>
                     <p className="tracking-tight text-muted-foreground font-medium text-sm">
@@ -1072,7 +1072,7 @@ export const FlickeringFooter = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-48 md:h-64 relative mt-24 z-0">
+            {/* <div className="w-full h-48 md:h-64 relative mt-24 z-0">
                 <div className="absolute inset-0 bg-gradient-to-t from-transparent to-background z-10 from-40%" />
                 <div className="absolute inset-0 mx-6">
                     <FlickeringGrid
@@ -1086,7 +1086,7 @@ export const FlickeringFooter = () => {
                         flickerChance={0.1}
                     />
                 </div>
-            </div>
+            </div> */}
         </footer>
     );
 };
