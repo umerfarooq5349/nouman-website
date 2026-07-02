@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 interface ServiceCardProps {
   service: typeof services[0];
@@ -99,31 +100,35 @@ function ServiceCard({ service, index, className }: ServiceCardProps) {
 
 export function ServicesBento() {
   return (
-    <section id="services" className="py-24 sm:py-32">
+    <section id="services" className="relative py-12 overflow-visible">
       <div className="container">
-        <div className="mb-14 max-w-2xl">
-          <Reveal>
-            <Badge>Services</Badge>
-          </Reveal>
-          <TextReveal
-            as="h2"
-            text="Everything you need to capture, nurture, and book — built in one place."
-            className="mt-5 font-display text-display-lg font-semibold text-balance"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense">
-          {services.map((service, i) => (
-            <ServiceCard
-              key={service.title}
-              service={service}
-              index={i}
-              className={cn(
-                service.span === "wide" && "sm:col-span-2 lg:col-span-2"
-              )}
-            />
-          ))}
-        </div>
+        <ContainerScroll
+          titleComponent={
+            <div className="flex flex-col items-center">
+              <Reveal>
+                <Badge>Services</Badge>
+              </Reveal>
+              <TextReveal
+                as="h2"
+                text="Everything you need to capture, nurture, and book — built in one place."
+                className="mt-5 font-display text-display-lg font-semibold text-center text-balance max-w-3xl"
+              />
+            </div>
+          }
+        >
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense text-left p-1 h-full">
+            {services.map((service, i) => (
+              <ServiceCard
+                key={service.title}
+                service={service}
+                index={i}
+                className={cn(
+                  service.span === "wide" && "sm:col-span-2 lg:col-span-2"
+                )}
+              />
+            ))}
+          </div>
+        </ContainerScroll>
       </div>
     </section>
   );
