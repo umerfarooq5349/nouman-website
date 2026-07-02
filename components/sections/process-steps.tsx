@@ -20,24 +20,28 @@ export function ProcessSteps() {
     {
       id: 1,
       name: `01. ${steps[0].title}`,
+      description: steps[0].description,
       status: "complete" as const,
       position: { top: "70%", left: "5%" },
     },
     {
       id: 2,
       name: `02. ${steps[1].title}`,
+      description: steps[1].description,
       status: "complete" as const,
       position: { top: "15%", left: "20%" },
     },
     {
       id: 3,
       name: `03. ${steps[2].title}`,
+      description: steps[2].description,
       status: "in-progress" as const,
       position: { top: "45%", left: "55%" },
     },
     {
       id: 4,
       name: `04. ${steps[3].title}`,
+      description: steps[3].description,
       status: "pending" as const,
       position: { top: "10%", right: "10%" },
     },
