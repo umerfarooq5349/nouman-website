@@ -240,24 +240,24 @@ export function Hero() {
                   </span>
                 </div>
                 {/* Mini SVG Area Chart */}
-                <svg viewBox="0 0 200 60" width="100%" height="60" className="overflow-visible">
+                <svg viewBox="0 0 200 120" width="100%" height="120" className="overflow-visible">
                   <defs>
                     <linearGradient id="grad-react" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.3" />
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.35" />
                       <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
                     </linearGradient>
                   </defs>
                   {/* Grid lines */}
-                  <line x1="0" y1="10" x2="200" y2="10" stroke="hsl(var(--border) / 0.3)" strokeWidth="0.5" strokeDasharray="2 2" />
-                  <line x1="0" y1="30" x2="200" y2="30" stroke="hsl(var(--border) / 0.3)" strokeWidth="0.5" stroke-dasharray="2 2" />
-                  <line x1="0" y1="50" x2="200" y2="50" stroke="hsl(var(--border) / 0.3)" stroke-width="0.5" stroke-dasharray="2 2" />
+                  <line x1="0" y1="20" x2="200" y2="20" stroke="hsl(var(--border) / 0.3)" strokeWidth="0.5" strokeDasharray="2 2" />
+                  <line x1="0" y1="60" x2="200" y2="60" stroke="hsl(var(--border) / 0.3)" strokeWidth="0.5" stroke-dasharray="2 2" />
+                  <line x1="0" y1="100" x2="200" y2="100" stroke="hsl(var(--border) / 0.3)" stroke-width="0.5" stroke-dasharray="2 2" />
                   {/* Area path */}
-                  <path d="M 0 50 Q 25 45 50 35 T 100 30 T 150 15 T 200 5 L 200 60 L 0 60 Z" fill="url(#grad-react)" />
+                  <path d="M 0 100 Q 25 90 50 70 T 100 60 T 150 30 T 200 10 L 200 120 L 0 120 Z" fill="url(#grad-react)" />
                   {/* Line path */}
-                  <path d="M 0 50 Q 25 45 50 35 T 100 30 T 150 15 T 200 5" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" />
+                  <path d="M 0 100 Q 25 90 50 70 T 100 60 T 150 30 T 200 10" fill="none" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round" />
                   {/* Data point dots */}
-                  <circle cx="200" cy="5" r="4" fill="hsl(var(--primary))" />
-                  <circle cx="200" cy="5" r="7" fill="none" stroke="hsl(var(--primary))" stroke-width="1.5" opacity="0.5" />
+                  <circle cx="200" cy="10" r="4" fill="hsl(var(--primary))" />
+                  <circle cx="200" cy="10" r="7" fill="none" stroke="hsl(var(--primary))" stroke-width="1.5" opacity="0.5" />
                 </svg>
               </div>
             </div>
