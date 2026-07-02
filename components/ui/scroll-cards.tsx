@@ -5,6 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export interface iCardItem {
   title: string;
@@ -39,6 +40,7 @@ export function CardsParallax({ items }: CardsParallaxProps) {
             progress={scrollYProgress}
             range={[i * (1 / items.length), 1]}
             targetScale={targetScale}
+            totalItems={items.length}
           />
         );
       })}
@@ -51,6 +53,7 @@ interface CardProps extends iCardItem {
   progress: any;
   range: [number, number];
   targetScale: number;
+  totalItems: number;
 }
 
 function Card({
@@ -65,15 +68,19 @@ function Card({
   progress,
   range,
   targetScale,
+  totalItems,
 }: CardProps) {
   const container = useRef(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 768px)");
     setIsDesktop(media.matches);
     const listener = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
     media.addEventListener("change", listener);
+    setMounted(true);
     return () => media.removeEventListener("change", listener);
   }, []);
 
@@ -84,6 +91,30 @@ function Card({
   // Parallax translation to slide card up/down immediately on scroll
   const y = useTransform(progress, range, [0, -120]);
   const yVal = isDesktop ? y : 0;
+
+  // Background and backdrop blur transitions for scroll state
+  const rgbValues = mounted && resolvedTheme === "light" 
+    ? "255, 255, 255" 
+    : "9, 9, 11"; // Matches default Zinc theme background colors
+
+  const start = range[0];
+  const end = i === totalItems - 1 ? 1 : (i + 1) * (1 / totalItems);
+
+  // Map progress to solid background when resting/fully visible
+  const bgOpacity = useTransform(
+    progress,
+    [start - 0.08, start, end - 0.02, end + 0.06],
+    [0.5, 1.0, 1.0, 0.5]
+  );
+
+  const blurAmount = useTransform(
+    progress,
+    [start - 0.08, start, end - 0.02, end + 0.06],
+    [16, 0, 0, 16]
+  );
+
+  const bg = useTransform(bgOpacity, (v) => isDesktop ? `rgba(${rgbValues}, ${v})` : `rgba(${rgbValues}, 1)`);
+  const blur = useTransform(blurAmount, (v) => isDesktop ? `blur(${v}px)` : "blur(0px)");
 
   // Modern brand-specific styling configuration
   const getBrandConfig = (colorName: string) => {
@@ -136,8 +167,11 @@ function Card({
           style={{
             scale: scaleVal,
             y: yVal,
+            backgroundColor: bg,
+            backdropFilter: blur,
+            WebkitBackdropFilter: blur,
           }}
-          className={`relative w-full h-fit md:h-[55vh] rounded-[2rem] md:rounded-[2.5rem] border border-border/80 bg-card/60 dark:bg-card/35 backdrop-blur-md p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-10 overflow-hidden transition-all duration-300 ${brand.border}`}
+          className={`relative w-full h-fit md:h-[55vh] rounded-[2rem] md:rounded-[2.5rem] border border-border/80 p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-10 overflow-hidden transition-all duration-300 ${brand.border}`}
         >
           {/* Soft Ambient Brand Glow */}
           <div className={`absolute -right-24 -bottom-24 w-80 h-80 rounded-full blur-3xl pointer-events-none z-0 ${brand.glow}`} />
