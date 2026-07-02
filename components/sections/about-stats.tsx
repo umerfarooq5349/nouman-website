@@ -35,20 +35,47 @@ export function AboutStats() {
             </div>
 
             <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-4 mt-auto">
-              {stats.map((stat, i) => (
-                <Reveal key={i} index={i} className="bg-card">
-                  <div className="flex h-full flex-col gap-2 p-6 sm:p-8">
-                    <p className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-                      <CountUp
-                        value={stat.value}
-                        prefix={stat.prefix}
-                        suffix={stat.suffix}
-                      />
-                    </p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  </div>
-                </Reveal>
-              ))}
+              {stats.map((stat, i) => {
+                const statColors = [
+                  // Blue
+                  {
+                    text: "text-[#519CAB]",
+                    bg: "hover:bg-[#519CAB]/5",
+                  },
+                  // Red
+                  {
+                    text: "text-[#EF4444] dark:text-red-500",
+                    bg: "hover:bg-[#EF4444]/5",
+                  },
+                  // Yellow
+                  {
+                    text: "text-[#FFC64F]",
+                    bg: "hover:bg-[#FFC64F]/5",
+                  },
+                  // Combined Gradient
+                  {
+                    text: "bg-gradient-to-r from-[#519CAB] via-[#EF4444] to-[#FFC64F] bg-clip-text text-transparent font-bold",
+                    bg: "hover:bg-primary/5",
+                  },
+                ];
+
+                const config = statColors[i % statColors.length];
+
+                return (
+                  <Reveal key={i} index={i} className="bg-card">
+                    <div className={`flex h-full flex-col gap-2 p-6 sm:p-8 transition-colors duration-300 ${config.bg}`}>
+                      <p className={`font-display text-4xl font-semibold tracking-tight sm:text-5xl ${config.text}`}>
+                        <CountUp
+                          value={stat.value}
+                          prefix={stat.prefix}
+                          suffix={stat.suffix}
+                        />
+                      </p>
+                      <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </ContainerScroll>

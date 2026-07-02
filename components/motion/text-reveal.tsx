@@ -39,6 +39,7 @@ export function TextReveal({
         const isHighlighted = highlightWords.some(
           (hw) => hw.toLowerCase() === cleanWord.toLowerCase()
         );
+        const isGHL = cleanWord.toLowerCase() === "gohighlevel";
 
         return (
           <span key={i} className="inline-block overflow-hidden align-bottom" aria-hidden>
@@ -50,7 +51,16 @@ export function TextReveal({
               }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              {word}
+              {isGHL ? (
+                <>
+                  <span className="text-[#FFC64F]">Go</span>
+                  <span className="text-[#519CAB]">High</span>
+                  <span className="text-[#EF4444] dark:text-red-500">Level</span>
+                  {word.substring(cleanWord.length)}
+                </>
+              ) : (
+                word
+              )}
               {i < words.length - 1 ? "\u00A0" : ""}
             </motion.span>
           </span>
