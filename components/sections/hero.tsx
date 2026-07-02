@@ -99,15 +99,17 @@ export function Hero() {
         }}
       />
 
-      {/* Multi-Layered Parallax Background Image */}
-      <div className="absolute inset-0 z-0 overflow-hidden w-full h-[120%] pointer-events-none">
-        {/* Layer 1: bg.png (Base grid) */}
+      {/* Static Base Background Image */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src="/bg.png"
           alt="Background grid"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-65 z-0"
+          className="w-full h-full object-cover object-center opacity-65"
         />
+      </div>
 
+      {/* Multi-Layered Parallax Background Image */}
+      <div className="absolute inset-0 z-0 overflow-hidden w-full h-[120%] pointer-events-none">
         {/* Layer 2: nouman.png (Portrait which follows the mouse) */}
         <motion.div
           style={{ 
