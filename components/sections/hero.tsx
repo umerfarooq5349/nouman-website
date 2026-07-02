@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useEffect } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { site } from "@/lib/content";
 import { Badge } from "@/components/ui/badge";
@@ -25,35 +25,54 @@ export function Hero() {
   const yChipB = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // Direct DOM mutation for spotlight — avoids React re-renders on every mousemove
+  // Spring physics for smooth mouse follow translation
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 120 };
+  const moveX = useSpring(mouseX, springConfig);
+  const moveY = useSpring(mouseY, springConfig);
+
+  // Direct DOM mutation for spotlight + framer motion spring updates
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!ref.current || !overlayRef.current) return;
+    if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    if (!hasInteracted.current) {
-      hasInteracted.current = true;
-      overlayRef.current.style.opacity = "1";
+    if (overlayRef.current) {
+      if (!hasInteracted.current) {
+        hasInteracted.current = true;
+        overlayRef.current.style.opacity = "1";
+      }
+      overlayRef.current.style.background = `radial-gradient(
+        circle 380px at ${x}px ${y}px,
+        transparent 0%,
+        transparent 60px,
+        hsl(var(--background) / 0.55) 190px,
+        hsl(var(--background) / 0.92) 380px
+      )`;
     }
 
-    overlayRef.current.style.background = `radial-gradient(
-      circle 380px at ${x}px ${y}px,
-      transparent 0%,
-      transparent 60px,
-      hsl(var(--background) / 0.55) 190px,
-      hsl(var(--background) / 0.92) 380px
-    )`;
-  }, []);
+    // Parallax mouse follow calculation (translates max -25px to 25px)
+    if (!prefersReduced) {
+      const width = rect.width;
+      const height = rect.height;
+      const xOffset = ((e.clientX - rect.left) / width - 0.5) * 50;
+      const yOffset = ((e.clientY - rect.top) / height - 0.5) * 50;
+      mouseX.set(xOffset);
+      mouseY.set(yOffset);
+    }
+  }, [mouseX, mouseY, prefersReduced]);
 
   const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
     if (!overlayRef.current) return;
     overlayRef.current.style.opacity = "0";
     hasInteracted.current = false;
-  }, []);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
-    if (prefersReduced) return;
     const section = ref.current;
     if (!section) return;
     section.addEventListener("mousemove", handleMouseMove, { passive: true });
@@ -62,7 +81,7 @@ export function Hero() {
       section.removeEventListener("mousemove", handleMouseMove);
       section.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [handleMouseMove, handleMouseLeave, prefersReduced]);
+  }, [handleMouseMove, handleMouseLeave]);
 
   return (
     <section
@@ -80,20 +99,32 @@ export function Hero() {
         }}
       />
 
-      {/* Parallax Background Image */}
+      {/* Multi-Layered Parallax Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden w-full h-[120%] pointer-events-none">
+        {/* Layer 1: bg.png (Base grid) */}
+        <img
+          src="/bg.png"
+          alt="Background grid"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-65 z-0"
+        />
+
+        {/* Layer 2: nouman.png (Portrait which follows the mouse) */}
         <motion.div
-          style={{ y: yBg }}
-          className="absolute inset-0 w-full h-full opacity-30 sm:opacity-100 transition-opacity duration-300"
+          style={{ 
+            y: yBg,
+            x: moveX,
+            translateY: moveY,
+          }}
+          className="absolute inset-0 w-full h-full opacity-35 sm:opacity-100 transition-opacity duration-300 z-10"
         >
           <img
             src="/nouman.png"
-            alt="Background profile"
+            alt="Muhammad Nouman profile"
             className="w-full h-full object-cover object-top"
           />
           {/* Gradients to blend the background image on edges softly */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/25 to-transparent z-20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20" />
         </motion.div>
       </div>
 
