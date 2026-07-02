@@ -106,25 +106,6 @@ export function ProcessSteps() {
           mapImageSrc="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-SsfjxCJh43Hr1dqzkbFWUGH3ICZQbH.png&w=320&q=75"
           className="py-12"
         />
-
-        {/* Informative process description grid below the map */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 max-w-6xl mx-auto">
-          {steps.map((step, index) => (
-            <Reveal key={step.number} index={index}>
-              <div className="flex flex-col gap-3 p-6 rounded-2xl border border-border/50 bg-card/45 backdrop-blur-sm hover:border-primary/30 transition-all duration-300">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  Phase {step.number}
-                </span>
-                <h3 className="font-display text-lg font-semibold leading-tight text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
