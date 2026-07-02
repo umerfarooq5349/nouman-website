@@ -45,12 +45,12 @@ export function AboutStats() {
                     bgGlow: "bg-[#519CAB]/5",
                     borderColor: "hover:border-[#519CAB]/30",
                   },
-                  // Red
+                  // Sage Green
                   {
                     icon: (className: string) => <Clock className={className} />,
-                    color: "text-[#D3968C]",
-                    bgGlow: "bg-[#D3968C]/5",
-                    borderColor: "hover:border-[#D3968C]/30",
+                    color: "text-[#839958]",
+                    bgGlow: "bg-[#839958]/5",
+                    borderColor: "hover:border-[#839958]/30",
                   },
                   // Yellow
                   {
@@ -62,7 +62,8 @@ export function AboutStats() {
                   // Combined Gradient
                   {
                     icon: (className: string) => <BadgeDollarSign className={className} />,
-                    color: "bg-gradient-to-r from-[#519CAB] via-[#D3968C] to-[#FFC64F] bg-clip-text text-transparent font-bold",
+                    color: "text-[#519CAB]",
+                    textColor: "bg-gradient-to-r from-[#519CAB] via-[#839958] to-[#FFC64F] bg-clip-text text-transparent font-bold",
                     bgGlow: "bg-primary/5",
                     borderColor: "hover:border-primary/30",
                   },
@@ -85,7 +86,7 @@ export function AboutStats() {
                         </div>
 
                         {/* Stat Value */}
-                        <p className={`font-display text-4xl font-semibold tracking-tight sm:text-5xl ${config.color}`}>
+                        <p className={`font-display text-4xl font-semibold tracking-tight sm:text-5xl ${config.textColor || config.color}`}>
                           <CountUp
                             value={stat.value}
                             prefix={stat.prefix}
