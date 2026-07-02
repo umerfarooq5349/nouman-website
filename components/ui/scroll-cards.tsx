@@ -76,7 +76,7 @@ function Card({
     media.addEventListener("change", listener);
     return () => media.removeEventListener("change", listener);
   }, []);
-  
+
   // Scale down the card as we scroll further down the container
   const scale = useTransform(progress, range, [1, targetScale]);
   const scaleVal = isDesktop ? scale : 1;
@@ -131,56 +131,57 @@ function Card({
         top: isDesktop ? "100px" : "auto",
       }}
     >
-      <motion.div
-        style={{
-          scale: scaleVal,
-          y: yVal,
-        }}
-        className={`relative w-full max-w-5xl h-fit md:h-[55vh] rounded-[2rem] md:rounded-[2.5rem] border border-border/80 bg-card/60 dark:bg-card/35 backdrop-blur-md p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-10 overflow-hidden transition-all duration-300 ${brand.border}`}
-      >
-        {/* Soft Ambient Brand Glow */}
-        <div className={`absolute -right-24 -bottom-24 w-80 h-80 rounded-full blur-3xl pointer-events-none z-0 ${brand.glow}`} />
+      <Link href={link} className="w-full max-w-5xl block cursor-pointer group">
+        <motion.div
+          style={{
+            scale: scaleVal,
+            y: yVal,
+          }}
+          className={`relative w-full h-fit md:h-[55vh] rounded-[2rem] md:rounded-[2.5rem] border border-border/80 bg-card/60 dark:bg-card/35 backdrop-blur-md p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-10 overflow-hidden transition-all duration-300 ${brand.border}`}
+        >
+          {/* Soft Ambient Brand Glow */}
+          <div className={`absolute -right-24 -bottom-24 w-80 h-80 rounded-full blur-3xl pointer-events-none z-0 ${brand.glow}`} />
 
-        {/* Details section */}
-        <div className="flex flex-col justify-between flex-[1.1] relative z-10">
-          <div>
-            {tag && (
-              <span className={`inline-block text-xs font-semibold uppercase tracking-wider mb-3 md:mb-4 px-3 py-1 rounded-full ${brand.tagBg}`}>
-                {tag}
-              </span>
-            )}
-            <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight">
-              {title}
-            </h3>
-            <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground max-w-md">
-              {description}
-            </p>
+          {/* Details section */}
+          <div className="flex flex-col justify-between flex-[1.1] relative z-10">
+            <div>
+              {tag && (
+                <span className={`inline-block text-xs font-semibold uppercase tracking-wider mb-3 md:mb-4 px-3 py-1 rounded-full ${brand.tagBg}`}>
+                  {tag}
+                </span>
+              )}
+              <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight">
+                {title}
+              </h3>
+              <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground max-w-md">
+                {description}
+              </p>
+            </div>
+
+            <div className="mt-6 md:mt-0">
+              <div
+                className="inline-flex items-center gap-2 text-sm md:text-base font-semibold text-foreground group-hover:text-primary transition-colors duration-300"
+              >
+                <span>View Case Study</span>
+                <ArrowUpRight className="size-4 md:size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </div>
+            </div>
           </div>
 
-          <div className="mt-6 md:mt-0">
-            <Link
-              href={link}
-              className="inline-flex items-center gap-2 group text-sm md:text-base font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
-            >
-              <span>View Case Study</span>
-              <ArrowUpRight className="size-4 md:size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+          {/* Visual section */}
+          <div className="flex-1 relative h-48 sm:h-56 md:h-full w-full rounded-xl md:rounded-2xl overflow-hidden border border-border/20 aspect-[16/10] md:aspect-auto">
+            <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-300 z-10" />
+            <Image
+              src={src}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority={i === 0}
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+            />
           </div>
-        </div>
-
-        {/* Visual section */}
-        <div className="flex-1 relative h-48 sm:h-56 md:h-full w-full rounded-xl md:rounded-2xl overflow-hidden border border-border/20 group aspect-[16/10] md:aspect-auto">
-          <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-300 z-10" />
-          <Image
-            src={src}
-            alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority={i === 0}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-103"
-          />
-        </div>
-      </motion.div>
+        </motion.div>
+      </Link>
     </div>
   );
 }
