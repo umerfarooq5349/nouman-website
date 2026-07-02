@@ -10,6 +10,7 @@ interface Milestone {
   name: string;
   description?: string;
   status: "complete" | "in-progress" | "pending";
+  icon?: React.ComponentType<any>;
   position: {
     top?: string;
     left?: string;
@@ -22,6 +23,7 @@ interface Milestone {
 interface AnimatedRoadmapProps extends React.HTMLAttributes<HTMLDivElement> {
   milestones: Milestone[];
   mapImageSrc: string;
+  scrollYProgress?: any;
 }
 
 // Sub-component for a single milestone marker
@@ -29,12 +31,13 @@ const MilestoneMarker = ({ milestone }: { milestone: Milestone }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   const statusClasses = {
-    complete: "bg-green-500 border-green-700 dark:border-green-400",
-    "in-progress": "bg-blue-500 border-blue-700 dark:border-blue-400 animate-pulse",
-    pending: "bg-muted border-border",
+    complete: "text-green-500 bg-green-500/10 border-green-500/30",
+    "in-progress": "text-blue-500 bg-blue-500/10 border-blue-500/30 animate-pulse",
+    pending: "text-muted-foreground bg-muted/20 border-border",
   };
 
   const isRightSide = milestone.position.right !== undefined;
+  const Icon = milestone.icon;
 
   return (
     <div
@@ -50,15 +53,15 @@ const MilestoneMarker = ({ milestone }: { milestone: Milestone }) => {
         viewport={{ once: true, amount: 0.8 }}
         className="flex items-center gap-4 cursor-pointer"
       >
-        {/* Interactive bubble dot */}
-        <div className="relative flex h-8 w-8 items-center justify-center bg-background rounded-full border border-border shadow-sm hover:scale-110 transition-transform duration-200">
-          <div
-            className={cn(
-              "absolute h-3 w-3 rounded-full border-2",
-              statusClasses[milestone.status]
-            )}
-          />
-          <div className="absolute h-full w-full rounded-full bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+        {/* Interactive bubble dot with icon */}
+        <div className={cn(
+          "relative flex h-10 w-10 items-center justify-center bg-card rounded-full border shadow-sm transition-all duration-300 group-hover:scale-110",
+          statusClasses[milestone.status]
+        )}>
+          {Icon ? <Icon className="size-4.5" /> : (
+            <div className="h-2.5 w-2.5 rounded-full bg-current" />
+          )}
+          <div className="absolute h-full w-full rounded-full bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
         </div>
 
         {/* Milestone Name Badge */}
@@ -103,14 +106,15 @@ const MilestoneMarker = ({ milestone }: { milestone: Milestone }) => {
 
 // Main AnimatedRoadmap component
 const AnimatedRoadmap = React.forwardRef<HTMLDivElement, AnimatedRoadmapProps>(
-  ({ className, milestones, mapImageSrc, ...props }, ref) => {
+  ({ className, milestones, mapImageSrc, scrollYProgress, ...props }, ref) => {
     const targetRef = React.useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
+    const { scrollYProgress: localScroll } = useScroll({
       target: targetRef,
       offset: ["start end", "end start"],
     });
 
-    const pathLength = useTransform(scrollYProgress, [0.15, 0.7], [0, 1]);
+    const activeProgress = scrollYProgress || localScroll;
+    const pathLength = useTransform(activeProgress, [0.15, 0.75], [0, 1]);
 
     return (
       <div
