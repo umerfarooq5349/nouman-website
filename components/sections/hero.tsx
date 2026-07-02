@@ -160,6 +160,8 @@ export function Hero() {
             as="h1"
             text={site.headline}
             delay={0.1}
+            highlightWords={["Marketing", "systems"]}
+            highlightClassName="text-[#519CAB]"
             className="mt-6 max-w-[14ch] font-display text-display-xl font-semibold text-balance"
           />
 
