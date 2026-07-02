@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
 import { CountUp } from "@/components/motion/count-up";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import { TrendingUp, Clock, Globe, BadgeDollarSign } from "lucide-react";
 
 export function AboutStats() {
   return (
@@ -34,44 +35,69 @@ export function AboutStats() {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-4 mt-auto">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-auto w-full py-4">
               {stats.map((stat, i) => {
-                const statColors = [
+                const statData = [
                   // Blue
                   {
-                    text: "text-[#519CAB]",
-                    bg: "hover:bg-[#519CAB]/5",
+                    icon: (className: string) => <TrendingUp className={className} />,
+                    color: "text-[#519CAB]",
+                    bgGlow: "bg-[#519CAB]/5",
+                    borderColor: "hover:border-[#519CAB]/30",
                   },
                   // Red
                   {
-                    text: "text-[#EF4444] dark:text-red-500",
-                    bg: "hover:bg-[#EF4444]/5",
+                    icon: (className: string) => <Clock className={className} />,
+                    color: "text-[#D3968C]",
+                    bgGlow: "bg-[#D3968C]/5",
+                    borderColor: "hover:border-[#D3968C]/30",
                   },
                   // Yellow
                   {
-                    text: "text-[#FFC64F]",
-                    bg: "hover:bg-[#FFC64F]/5",
+                    icon: (className: string) => <Globe className={className} />,
+                    color: "text-[#FFC64F]",
+                    bgGlow: "bg-[#FFC64F]/5",
+                    borderColor: "hover:border-[#FFC64F]/30",
                   },
                   // Combined Gradient
                   {
-                    text: "bg-gradient-to-r from-[#519CAB] via-[#EF4444] to-[#FFC64F] bg-clip-text text-transparent font-bold",
-                    bg: "hover:bg-primary/5",
+                    icon: (className: string) => <BadgeDollarSign className={className} />,
+                    color: "bg-gradient-to-r from-[#519CAB] via-[#D3968C] to-[#FFC64F] bg-clip-text text-transparent font-bold",
+                    bgGlow: "bg-primary/5",
+                    borderColor: "hover:border-primary/30",
                   },
                 ];
 
-                const config = statColors[i % statColors.length];
+                const config = statData[i % statData.length];
 
                 return (
-                  <Reveal key={i} index={i} className="bg-card">
-                    <div className={`flex h-full flex-col gap-2 p-6 sm:p-8 transition-colors duration-300 ${config.bg}`}>
-                      <p className={`font-display text-4xl font-semibold tracking-tight sm:text-5xl ${config.text}`}>
-                        <CountUp
-                          value={stat.value}
-                          prefix={stat.prefix}
-                          suffix={stat.suffix}
-                        />
+                  <Reveal key={i} index={i} className="h-full">
+                    <div 
+                      className={`group relative flex h-full flex-col items-center text-center justify-between p-8 rounded-3xl border border-border bg-card/45 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${config.borderColor}`}
+                    >
+                      {/* Ambient background glow */}
+                      <div className={`absolute inset-0 w-full h-full rounded-[22px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none -z-10 ${config.bgGlow}`} />
+
+                      <div className="flex flex-col items-center gap-4 w-full">
+                        {/* Icon Container */}
+                        <div className={`p-3 rounded-2xl bg-muted/60 transition-transform duration-300 group-hover:scale-110 ${config.color}`}>
+                          {config.icon("size-6")}
+                        </div>
+
+                        {/* Stat Value */}
+                        <p className={`font-display text-4xl font-semibold tracking-tight sm:text-5xl ${config.color}`}>
+                          <CountUp
+                            value={stat.value}
+                            prefix={stat.prefix}
+                            suffix={stat.suffix}
+                          />
+                        </p>
+                      </div>
+
+                      {/* Stat Label */}
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-4 font-medium">
+                        {stat.label}
                       </p>
-                      <p className="text-sm text-muted-foreground">{stat.label}</p>
                     </div>
                   </Reveal>
                 );
