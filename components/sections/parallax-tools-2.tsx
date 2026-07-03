@@ -20,29 +20,29 @@ interface ToolItem {
 // Placed in distinct Left and Right zones to keep the center empty for text
 const tools: ToolItem[] = [
   // Row 1 (top) - 3 logos
-  { name: "Clay",          speed: 0.16, opacity: 1.0,  fontSize: "2.6rem",  top: "8%",  left: "15%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/clay.png" },
-  { name: "Apify",         speed: 0.08, opacity: 0.75, fontSize: "1.8rem",  top: "10%", left: "48%", link: "https://apify.com/?fpr=yvcnzu", logoSrc: "/affiliate-logos/apify.png" },
-  { name: "GoHighLevel",   speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "8%",  left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/gohighlevel.png" },
-  
+  { name: "Clay", speed: 0.16, opacity: 1.0, fontSize: "2.6rem", top: "8%", left: "15%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/clay.png" },
+  { name: "Apify", speed: 0.08, opacity: 0.75, fontSize: "1.8rem", top: "10%", left: "48%", link: "https://apify.com/?fpr=yvcnzu", logoSrc: "/affiliate-logos/apify.png" },
+  { name: "GoHighLevel", speed: 0.20, opacity: 1.0, fontSize: "2.8rem", top: "8%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/gohighlevel.png" },
+
   // Row 2 - 4 logos
-  { name: "Malcare",       speed: 0.07, opacity: 0.55, fontSize: "1.4rem",  top: "28%", left: "8%",  link: "https://malcare.com/?src=F0F396", logoSrc: "/affiliate-logos/malecare.png" },
-  { name: "Extendly",      speed: 0.13, opacity: 0.85, fontSize: "2.0rem",  top: "30%", left: "30%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/extendly.png" },
-  { name: "Make.com",      speed: 0.14, opacity: 1.0,  fontSize: "2.3rem",  top: "32%", left: "65%", link: "https://www.make.com/en/register?pc=ignitto", logoSrc: "/affiliate-logos/make.png" },
-  { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "28%", left: "88%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affiliate-logos/lovable.png" },
-  
+  { name: "Malcare", speed: 0.07, opacity: 0.55, fontSize: "1.4rem", top: "28%", left: "8%", link: "https://malcare.com/?src=F0F396", logoSrc: "/affiliate-logos/malecare.png" },
+  { name: "Extendly", speed: 0.13, opacity: 0.85, fontSize: "2.0rem", top: "30%", left: "30%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/extendly.png" },
+  { name: "Make.com", speed: 0.14, opacity: 1.0, fontSize: "2.3rem", top: "32%", left: "65%", link: "https://www.make.com/en/register?pc=ignitto", logoSrc: "/affiliate-logos/make.png" },
+  { name: "Lovable.dev", speed: 0.10, opacity: 0.80, fontSize: "2.0rem", top: "28%", left: "88%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affiliate-logos/lovable.png" },
+
   // Row 3 (center) - 2 logos on extreme margins to keep center empty
-  { name: "Warmly",        speed: 0.15, opacity: 0.80, fontSize: "2.1rem",  top: "48%", left: "12%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/warmly.png" },
-  { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "48%", left: "85%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affiliate-logos/keap.png" },
-  
+  { name: "Warmly", speed: 0.15, opacity: 0.80, fontSize: "2.1rem", top: "48%", left: "12%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/warmly.png" },
+  { name: "Keap", speed: 0.05, opacity: 0.60, fontSize: "1.5rem", top: "48%", left: "85%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affiliate-logos/keap.png" },
+
   // Row 4 - 4 logos
-  { name: "Platform 10",   speed: 0.09, opacity: 0.85, fontSize: "1.8rem",  top: "68%", left: "8%",  link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/10.png" },
-  { name: "Platform 4",    speed: 0.11, opacity: 0.85, fontSize: "1.8rem",  top: "70%", left: "25%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/04.png" },
-  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "70%", left: "65%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
-  { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "68%", left: "88%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affiliate-logos/hunter.png" },
-  
+  { name: "Platform 10", speed: 0.09, opacity: 0.85, fontSize: "1.8rem", top: "68%", left: "8%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/10.png" },
+  { name: "Platform 4", speed: 0.11, opacity: 0.85, fontSize: "1.8rem", top: "70%", left: "25%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/04.png" },
+  { name: "Instantly.ai", speed: 0.12, opacity: 1.0, fontSize: "2.4rem", top: "70%", left: "65%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
+  { name: "Hunter.io", speed: 0.09, opacity: 0.75, fontSize: "1.9rem", top: "68%", left: "88%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affiliate-logos/hunter.png" },
+
   // Row 5 (bottom) - 2 logos
-  { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "88%", left: "20%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
-  { name: "Platform 14",   speed: 0.13, opacity: 0.85, fontSize: "1.8rem",  top: "88%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
+  { name: "Snov.io", speed: 0.11, opacity: 0.75, fontSize: "2.0rem", top: "88%", left: "20%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
+  { name: "Platform 14", speed: 0.13, opacity: 0.85, fontSize: "1.8rem", top: "88%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
 ];
 
 interface DraggableLogoProps {
@@ -53,9 +53,9 @@ interface DraggableLogoProps {
   onInteraction?: () => void;
 }
 
-function DraggableLogo({ 
-  tool, 
-  isMobile, 
+function DraggableLogo({
+  tool,
+  isMobile,
   dragConstraintsRef,
   outerRef,
   onInteraction
@@ -175,7 +175,7 @@ export function ParallaxToolsSection2() {
             maxWidth: "72%",
           }}
         >
-          Interactive Playground: Drag and move the tools around! (Fast Parallax)
+          I build on the world's most powerful marketing & automation platforms.
         </motion.h2>
         <p className="text-muted-foreground text-sm mt-2 font-medium text-center">
           Grab any platform logo to re-arrange or throw them across the canvas.
@@ -185,14 +185,19 @@ export function ParallaxToolsSection2() {
       {/* ── Interactive Drag & Parallax Canvas ─── */}
       <div
         ref={logoWrapperRef}
-        className="relative w-full overflow-hidden select-none bg-background/50 border border-border/40 rounded-3xl"
-        style={{ 
-          height: "80vh", 
+        className="relative w-full overflow-hidden select-none border border-border/40 rounded-3xl"
+        style={{
+          height: "80vh",
           width: "92%",
           maxWidth: "1400px",
           margin: "40px auto 0 auto",
-          backgroundImage: "radial-gradient(hsl(var(--border)/0.6) 1.5px, transparent 1.5px)",
-          backgroundSize: "24px 24px",
+          backgroundColor: "hsl(var(--background))",
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(131, 153, 88, 0.09) 0%, transparent 65%),
+            radial-gradient(circle at 80% 20%, rgba(255, 198, 79, 0.05) 0%, transparent 50%),
+            radial-gradient(hsl(var(--border)/0.5) 1.5px, transparent 1.5px)
+          `,
+          backgroundSize: "100% 100%, 100% 100%, 24px 24px",
         }}
       >
         {/* Animated Interaction Guide Overlay (Cursor Hand Tutorial) */}
@@ -253,11 +258,11 @@ export function ParallaxToolsSection2() {
 
         {/* Draggable & Parallax Logo Canvas Elements */}
         {tools.map((tool, i) => (
-          <DraggableLogo 
-            key={tool.name} 
-            tool={tool} 
-            isMobile={isMobile} 
-            dragConstraintsRef={logoWrapperRef} 
+          <DraggableLogo
+            key={tool.name}
+            tool={tool}
+            isMobile={isMobile}
+            dragConstraintsRef={logoWrapperRef}
             outerRef={(el) => { toolEls.current[i] = el; }}
             onInteraction={() => setHasInteracted(true)}
           />
