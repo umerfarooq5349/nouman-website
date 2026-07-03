@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ToolItem {
   name: string;
@@ -44,17 +44,21 @@ const tools: ToolItem[] = [
   { name: "Platform 14",   speed: 0.13, opacity: 0.85, fontSize: "1.8rem",  top: "88%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
 ];
 
+interface DraggableLogoProps {
+  tool: ToolItem;
+  isMobile: boolean;
+  dragConstraintsRef: React.RefObject<HTMLDivElement>;
+  outerRef: (el: HTMLDivElement | null) => void;
+  onInteraction?: () => void;
+}
+
 function DraggableLogo({ 
   tool, 
   isMobile, 
   dragConstraintsRef,
-  outerRef
-}: { 
-  tool: ToolItem; 
-  isMobile: boolean; 
-  dragConstraintsRef: React.RefObject<HTMLDivElement>;
-  outerRef: (el: HTMLDivElement | null) => void;
-}) {
+  outerRef,
+  onInteraction
+}: DraggableLogoProps) {
   const isDragging = useRef(false);
 
   const pos: React.CSSProperties = {};
@@ -86,6 +90,7 @@ function DraggableLogo({
         dragMomentum={true}
         onDragStart={() => {
           isDragging.current = true;
+          if (onInteraction) onInteraction();
         }}
         onDragEnd={() => {
           setTimeout(() => {
@@ -114,6 +119,7 @@ export function ParallaxToolsSection2() {
   const logoWrapperRef = useRef<HTMLDivElement>(null);
   const toolEls = useRef<(HTMLDivElement | null)[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -188,6 +194,43 @@ export function ParallaxToolsSection2() {
           backgroundSize: "24px 24px",
         }}
       >
+        {/* Animated Interaction Guide Overlay */}
+        <AnimatePresence>
+          {!hasInteracted && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
+              className="absolute z-40 pointer-events-none select-none flex flex-col items-center"
+              style={{
+                top: "18%",
+                left: "17%",
+              }}
+            >
+              {/* Pulsing Target Dot */}
+              <span className="flex h-3.5 w-3.5 mb-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFC64F] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#FFC64F]"></span>
+              </span>
+              
+              {/* Sliding Drag Gesture Card */}
+              <motion.div
+                animate={{
+                  x: [0, 20, 0],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="bg-background/95 backdrop-blur-md border border-primary/20 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-semibold text-foreground whitespace-nowrap"
+              >
+                <span>👈 Drag &amp; throw logos!</span>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Central Reveal/Intro Text Card (Un-clickable to let drags pass behind it) */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-30">
           <div className="max-w-[70%] text-center">
@@ -214,6 +257,7 @@ export function ParallaxToolsSection2() {
             isMobile={isMobile} 
             dragConstraintsRef={logoWrapperRef} 
             outerRef={(el) => { toolEls.current[i] = el; }}
+            onInteraction={() => setHasInteracted(true)}
           />
         ))}
       </div>
