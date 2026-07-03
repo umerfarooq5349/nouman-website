@@ -238,9 +238,8 @@ export function ParallaxToolsSection2() {
           )}
         </AnimatePresence>
 
-        {/* Central Reveal/Intro Text Card (Un-clickable to let drags pass behind it) */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-30">
-          <div className="max-w-[70%] text-center bg-background/60 backdrop-blur-md border border-border/40 px-10 py-8 rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.25)]">
+          <div className="max-w-[70%] text-center bg-[#839958]/10 backdrop-blur-md border border-[#839958]/20 px-10 py-8 rounded-3xl shadow-[0_12px_40px_rgba(131,153,88,0.12)]">
             <h3
               className="font-heading font-medium text-center text-balance"
               style={{
