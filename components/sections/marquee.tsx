@@ -4,18 +4,18 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const logos = [
-  { name: "Clay", src: "/affilate%20website%20logos/clay.png" },
-  { name: "Apify", src: "/affilate%20website%20logos/apify.png" },
-  { name: "GoHighLevel", src: "/affilate%20website%20logos/Gohoghlevel.png" },
-  { name: "Malcare", src: "/affilate%20website%20logos/malecare.png" },
-  { name: "Make", src: "/affilate%20website%20logos/make.png" },
-  { name: "Lovable", src: "/affilate%20website%20logos/lovable.png" },
-  { name: "Keap", src: "/affilate%20website%20logos/keap.png" },
-  { name: "Instantly", src: "/affilate%20website%20logos/instantly.png" },
-  { name: "Hunter", src: "/affilate%20website%20logos/hunter.png" },
-  { name: "Snov", src: "/affilate%20website%20logos/snov.png" },
-  { name: "Extendly", src: "/affilate%20website%20logos/extendly.png" },
-  { name: "Warmly", src: "/affilate%20website%20logos/warmly.png" },
+  { name: "Clay", src: "/affiliate-logos/clay.png" },
+  { name: "Apify", src: "/affiliate-logos/apify.png" },
+  { name: "GoHighLevel", src: "/affiliate-logos/gohighlevel.png" },
+  { name: "Malcare", src: "/affiliate-logos/malecare.png" },
+  { name: "Make", src: "/affiliate-logos/make.png" },
+  { name: "Lovable", src: "/affiliate-logos/lovable.png" },
+  { name: "Keap", src: "/affiliate-logos/keap.png" },
+  { name: "Instantly", src: "/affiliate-logos/instantly.png" },
+  { name: "Hunter", src: "/affiliate-logos/hunter.png" },
+  { name: "Snov", src: "/affiliate-logos/snov.png" },
+  { name: "Extendly", src: "/affiliate-logos/extendly.png" },
+  { name: "Warmly", src: "/affiliate-logos/warmly.png" },
 ];
 
 export function Marquee() {
