@@ -29,27 +29,27 @@ export function Marquee() {
 
   return (
     <section aria-label="Tools and platforms" className="border-y border-border py-8 bg-muted/10 overflow-hidden">
-      <div className="relative flex overflow-hidden mask-fade-x">
-        <div className="flex shrink-0 animate-marquee items-center gap-16 pr-16">
+      <div className="relative flex overflow-hidden mask-fade-x group">
+        <div className="flex shrink-0 animate-marquee items-center gap-16 pr-16 group-hover:[animation-play-state:paused]">
           {items.map((item, i) => (
             <img
               key={i}
               src={item.src}
               alt={item.name}
-              className="h-8 md:h-10 w-auto object-contain filter grayscale opacity-60 dark:grayscale-0 dark:brightness-0 dark:invert dark:opacity-40"
+              className="h-8 md:h-10 w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-115 cursor-pointer"
             />
           ))}
         </div>
         <div
           aria-hidden
-          className="flex shrink-0 animate-marquee items-center gap-16 pr-16"
+          className="flex shrink-0 animate-marquee items-center gap-16 pr-16 group-hover:[animation-play-state:paused]"
         >
           {items.map((item, i) => (
             <img
               key={`b-${i}`}
               src={item.src}
               alt={item.name}
-              className="h-8 md:h-10 w-auto object-contain filter grayscale opacity-60 dark:grayscale-0 dark:brightness-0 dark:invert dark:opacity-40"
+              className="h-8 md:h-10 w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 hover:scale-115 cursor-pointer"
             />
           ))}
         </div>
