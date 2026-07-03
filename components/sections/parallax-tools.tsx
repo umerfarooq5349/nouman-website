@@ -27,7 +27,7 @@ const tools: ToolItem[] = [
   { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "30%", left: "75%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affiliate-logos/lovable.png" },
   
   { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "55%", left: "20%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affiliate-logos/keap.png" },
-  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "54%", left: "62%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
+  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "68%", left: "65%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
   
   { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "78%", left: "15%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affiliate-logos/hunter.png" },
   { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "80%", left: "75%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
@@ -173,7 +173,8 @@ export function ParallaxToolsSection() {
               transition: "opacity 0.8s ease",
             }}
           >
-            Powering results for agencies and businesses across the US, UK, UAE, and beyond.
+            Powering results for agencies and businesses across the{" "}
+            <span className="text-[#FFC64F] font-semibold">US, UK, UAE</span>, and beyond.
           </h3>
         </div>
       </div>
