@@ -365,25 +365,25 @@ export type Testimonial = {
   title: string;
 };
 
-// PLACEHOLDER testimonials — replace with real, attributed client quotes.
+// Real, attributed client quotes.
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Our clinic went from chasing leads to a calendar that fills itself. The setup paid for itself in the first month.",
-    name: "Clinic Owner",
-    title: "Aesthetics · United States",
+      "I hired Muhammad to help me complete a GoHighLevel landing page build-out I had been struggling with, and he was amazing to work with. He was responsive to all requests and completed the project quickly and accurately. What would have taken me weeks to figure out, Muhammad was able to complete in just a few days. I will absolutely use him for future GoHighLevel projects",
+    name: "Lauren Newman",
+    title: "Leadership Professional | Marketing Strategist",
   },
   {
     quote:
-      "He rebuilt our funnel and the booking flow finally makes sense. Bookings climbed without us touching anything.",
-    name: "Practice Manager",
-    title: "Chiropractic · Australia",
+      "I'm SO happy I found Muhammad. He has been such a huge part of my business' automations and growth potential. He's very great to work with, timely, and very knowledgeable with GoHighLevel. Thank you for your great work ethic and talent, Muhammad!",
+    name: "Kristen O'Briant Fickeisen",
+    title: "Growth & Digital Marketing Strategy Consultant",
   },
   {
     quote:
-      "The outbound system books calls on its own now. Best money we've spent on the business this year.",
-    name: "Founder",
-    title: "B2B Services · UK",
+      "Muhammad was amazing to work with, and he over delivered. great experience having him help me with my go high level setup. I'm definitely planning on working with him again. I would say his English was amazing and easy to understand. highly recommend",
+    name: "Eric Campbell",
+    title: "Owner, Eric Campbell Photography",
   },
 ];
 
