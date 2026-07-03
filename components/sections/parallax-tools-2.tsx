@@ -44,83 +44,9 @@ const tools: ToolItem[] = [
   { name: "Platform 14",   speed: 0.13, opacity: 0.85, fontSize: "1.8rem",  top: "88%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
 ];
 
-function DraggableLogo({ 
-  tool, 
-  isMobile, 
-  dragConstraintsRef 
-}: { 
-  tool: ToolItem; 
-  isMobile: boolean; 
-  dragConstraintsRef: React.RefObject<HTMLDivElement>;
-}) {
-  const isDragging = useRef(false);
-
-  const pos: React.CSSProperties = {};
-  if (tool.top) pos.top = tool.top;
-  if (tool.bottom) pos.bottom = tool.bottom;
-
-  if (isMobile && tool.left) {
-    const val = parseFloat(tool.left);
-    pos.left = `${(val * 0.7 + 15).toFixed(1)}%`;
-    pos.transform = "translateX(-50%)";
-  } else if (tool.left) {
-    pos.left = tool.left;
-    pos.transform = "translateX(-50%)";
-  }
-
-  const floatDuration = 5 + (Math.random() * 4);
-
-  return (
-    <motion.div
-      drag
-      dragConstraints={dragConstraintsRef}
-      dragElastic={0.15}
-      dragMomentum={true}
-      onDragStart={() => {
-        isDragging.current = true;
-      }}
-      onDragEnd={() => {
-        setTimeout(() => {
-          isDragging.current = false;
-        }, 50);
-      }}
-      onTap={() => {
-        if (!isDragging.current) {
-          window.open(tool.link, "_blank", "noopener,noreferrer");
-        }
-      }}
-      whileDrag={{ scale: 1.25, zIndex: 50 }}
-      className="absolute cursor-grab active:cursor-grabbing z-20 flex items-center justify-center p-3"
-      style={{
-        ...pos,
-        opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
-      }}
-    >
-      <motion.div
-        animate={{
-          y: [0, -8, 0],
-          x: [0, 5, 0],
-        }}
-        transition={{
-          duration: floatDuration,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="flex items-center justify-center select-none pointer-events-none"
-      >
-        <img
-          src={tool.logoSrc}
-          alt={tool.name}
-          className="h-10 md:h-12 w-auto object-contain transition-all duration-300 opacity-80 hover:opacity-100 select-none pointer-events-none"
-        />
-      </motion.div>
-    </motion.div>
-  );
-}
-
 export function ParallaxToolsSection2() {
   const logoWrapperRef = useRef<HTMLDivElement>(null);
-  const revealEl = useRef<HTMLHeadingElement>(null);
+  const toolEls = useRef<(HTMLAnchorElement | null)[]>([]);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -139,15 +65,19 @@ export function ParallaxToolsSection2() {
       const rect = logoWrapper.getBoundingClientRect();
       const wh = window.innerHeight;
 
-      // Calculate vertical scroll progress inside this section
+      // Exact formula from test.html
       const total = logoWrapper.offsetHeight + wh;
       const scrolled = wh - rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / total));
+      const range = logoWrapper.offsetHeight;
 
-      // Fade in reveal text at progress > 0.55 (same as original component)
-      if (revealEl.current) {
-        revealEl.current.style.opacity = progress > 0.55 ? "1" : "0";
-      }
+      toolEls.current.forEach((el, i) => {
+        if (!el) return;
+        // Speed multiplied by 3.0 to make it scroll faster
+        const speed = tools[i].speed * 3.0;
+        const shift = (progress - 0.5) * range * speed * -1;
+        el.style.transform = `translate3d(0px, ${shift.toFixed(2)}px, 0px)`;
+      });
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -156,13 +86,16 @@ export function ParallaxToolsSection2() {
   }, []);
 
   return (
-    <div className="bg-background border-t border-border/40 py-20 relative overflow-hidden">
+    <div className="bg-background border-t border-border/40 py-16">
       {/* ── Intro copy wrapper ─── */}
-      <div className="flex flex-col items-center justify-center mb-8">
+      <div
+        className="flex flex-col items-center justify-center mb-8"
+        style={{ height: "20vh" }}
+      >
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-20%" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-heading font-semibold text-center text-balance px-4"
           style={{
@@ -172,54 +105,80 @@ export function ParallaxToolsSection2() {
             maxWidth: "72%",
           }}
         >
-          Interactive Playground: Drag and move the tools around!
+          I build on the world&apos;s most powerful marketing &amp; automation platforms (Fast Parallax).
         </motion.h2>
-        <p className="text-muted-foreground text-sm mt-2 font-medium text-center">
-          Grab any platform logo to re-arrange or throw them across the canvas.
-        </p>
       </div>
 
-      {/* ── Interactive Drag Canvas ─── */}
+      {/* ── Logo cloud ─── */}
       <div
         ref={logoWrapperRef}
-        className="relative w-full overflow-hidden select-none bg-background/50 border border-border/40 rounded-3xl"
-        style={{ 
-          height: "80vh", 
-          width: "92%",
-          maxWidth: "1400px",
-          margin: "40px auto 0 auto",
-          backgroundImage: "radial-gradient(hsl(var(--border)/0.6) 1.5px, transparent 1.5px)",
-          backgroundSize: "24px 24px",
-        }}
+        style={{ height: "80vh", position: "relative", overflow: "hidden", marginTop: "120px" }}
       >
-        {/* Central Reveal/Intro Text Card (Un-clickable to let drags pass behind it) */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10">
-          <div className="max-w-[70%] text-center">
-            <h3
-              ref={revealEl}
-              className="font-heading font-medium transition-opacity duration-700 ease-out"
-              style={{
-                fontSize: "clamp(1.2rem, 2.8vw, 2.2rem)",
-                lineHeight: 1.4,
-                color: "hsl(var(--primary))",
-                opacity: 0,
-              }}
-            >
-              Powering results for agencies and businesses across the{" "}
-              <span className="text-[#FFC64F] font-semibold">US, UK, UAE</span>, and beyond.
-            </h3>
-          </div>
-        </div>
+        <div
+          style={{
+            position: "relative",
+            width: "90%",
+            height: "100%",
+            margin: "0 auto",
+          }}
+        >
+          {tools.map((tool, i) => {
+            const pos: React.CSSProperties = {};
+            if (tool.top) pos.top = tool.top;
+            if (tool.bottom) pos.bottom = tool.bottom;
 
-        {/* Draggable Logo Canvas Elements */}
-        {tools.map((tool) => (
-          <DraggableLogo 
-            key={tool.name} 
-            tool={tool} 
-            isMobile={isMobile} 
-            dragConstraintsRef={logoWrapperRef} 
-          />
-        ))}
+            if (isMobile && tool.left) {
+              const val = parseFloat(tool.left);
+              pos.left = `${(val * 0.7 + 15).toFixed(1)}%`;
+              pos.transform = "translateX(-50%)"; // Center aligned anchor
+            } else if (tool.left) {
+              pos.left = tool.left;
+              pos.transform = "translateX(-50%)"; // Center aligned anchor
+            }
+
+            return (
+              <a
+                key={tool.name}
+                href={tool.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                ref={(el) => { toolEls.current[i] = el; }}
+                className="parallax-item transition-all duration-300 hover:scale-110 hover:-translate-y-1 cursor-pointer flex items-center justify-center absolute"
+                style={{
+                  ...pos,
+                  opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
+                  zIndex: 20,
+                }}
+              >
+                <img
+                  src={tool.logoSrc}
+                  alt={tool.name}
+                  className="h-10 md:h-12 w-auto object-contain transition-all duration-300 opacity-80 hover:opacity-100"
+                />
+              </a>
+            );
+          })}
+
+          {/* Reveal text — THROUGHOUT VISIBLE (opacity: 1) */}
+          <h3
+            className="font-heading font-medium text-center text-balance"
+            style={{
+              fontSize: "clamp(1.1rem, 2.5vw, 2.1rem)",
+              lineHeight: 1.4,
+              color: "hsl(var(--primary))",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "72%",
+              zIndex: 10,
+              opacity: 1, // Throughout visible
+            }}
+          >
+            Powering results for agencies and businesses across the{" "}
+            <span className="text-[#FFC64F] font-semibold">US, UK, UAE</span>, and beyond.
+          </h3>
+        </div>
       </div>
     </div>
   );
