@@ -18,24 +18,24 @@ interface ToolItem {
 
 // Placed in distinct Left (left: 2% or 10%) and Right (right: 2% or 10%) zones to keep the center completely empty
 const tools: ToolItem[] = [
-  { name: "Clay",          speed: 0.16, opacity: 1.0,  fontSize: "2.6rem",  top: "22%", left: "15%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/clay.png" },
-  { name: "Apify",         speed: 0.08, opacity: 0.75, fontSize: "1.8rem",  top: "24%", left: "38%", link: "https://apify.com/?fpr=yvcnzu", logoSrc: "/affiliate-logos/apify.png" },
-  { name: "GoHighLevel",   speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "22%", left: "62%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/gohighlevel.png" },
-  { name: "Extendly",      speed: 0.13, opacity: 0.85, fontSize: "2.0rem",  top: "24%", left: "82%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/extendly.png" },
+  { name: "Clay",          speed: 0.16, opacity: 1.0,  fontSize: "2.6rem",  top: "15%", left: "12%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/clay.png" },
+  { name: "Apify",         speed: 0.08, opacity: 0.75, fontSize: "1.8rem",  top: "26%", left: "22%", link: "https://apify.com/?fpr=yvcnzu", logoSrc: "/affiliate-logos/apify.png" },
+  { name: "GoHighLevel",   speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "15%", left: "85%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/gohighlevel.png" },
+  { name: "Extendly",      speed: 0.13, opacity: 0.85, fontSize: "2.0rem",  top: "26%", left: "75%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/extendly.png" },
   
-  { name: "Malcare",       speed: 0.07, opacity: 0.55, fontSize: "1.4rem",  top: "42%", left: "10%", link: "https://malcare.com/?src=F0F396", logoSrc: "/affiliate-logos/malecare.png" },
-  { name: "Make.com",      speed: 0.14, opacity: 1.0,  fontSize: "2.3rem",  top: "44%", left: "32%", link: "https://www.make.com/en/register?pc=ignitto", logoSrc: "/affiliate-logos/make.png" },
-  { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "42%", left: "60%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affiliate-logos/lovable.png" },
-  { name: "Warmly",        speed: 0.15, opacity: 0.80, fontSize: "2.1rem",  top: "44%", left: "85%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/warmly.png" },
+  { name: "Malcare",       speed: 0.07, opacity: 0.55, fontSize: "1.4rem",  top: "37%", left: "8%",  link: "https://malcare.com/?src=F0F396", logoSrc: "/affiliate-logos/malecare.png" },
+  { name: "Make.com",      speed: 0.14, opacity: 1.0,  fontSize: "2.3rem",  top: "48%", left: "20%", link: "https://www.make.com/en/register?pc=ignitto", logoSrc: "/affiliate-logos/make.png" },
+  { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "37%", left: "88%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affiliate-logos/lovable.png" },
+  { name: "Warmly",        speed: 0.15, opacity: 0.80, fontSize: "2.1rem",  top: "48%", left: "78%", link: "https://clay.com/?via=nouman", logoSrc: "/affiliate-logos/warmly.png" },
   
-  { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "62%", left: "15%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affiliate-logos/keap.png" },
-  { name: "Platform 4",    speed: 0.11, opacity: 0.85, fontSize: "1.8rem",  top: "64%", left: "36%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/04.png" },
-  { name: "Platform 10",   speed: 0.09, opacity: 0.85, fontSize: "1.8rem",  top: "64%", left: "60%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/10.png" },
-  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "62%", left: "82%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
+  { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "59%", left: "10%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affiliate-logos/keap.png" },
+  { name: "Platform 4",    speed: 0.11, opacity: 0.85, fontSize: "1.8rem",  top: "70%", left: "22%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/04.png" },
+  { name: "Platform 10",   speed: 0.09, opacity: 0.85, fontSize: "1.8rem",  top: "59%", left: "88%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/10.png" },
+  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "70%", left: "78%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
   
-  { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "80%", left: "18%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affiliate-logos/hunter.png" },
-  { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "82%", left: "50%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
-  { name: "Platform 14",   speed: 0.13, opacity: 0.85, fontSize: "1.8rem",  top: "80%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
+  { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "82%", left: "12%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affiliate-logos/hunter.png" },
+  { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "82%", left: "85%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
+  { name: "Platform 14",   speed: 0.13, opacity: 0.85, fontSize: "1.8rem",  top: "82%", left: "76%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
 ];
 
 export function ParallaxToolsSection() {
