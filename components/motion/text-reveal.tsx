@@ -55,7 +55,7 @@ export function TextReveal({
                 <>
                   <span className="text-[#FFC64F]">Go</span>
                   <span className="text-[#519CAB]">High</span>
-                  <span className="text-[#EF4444] dark:text-red-500">Level</span>
+                  <span className="text-[#839958] dark:text-[#839958]">Level</span>
                   {word.substring(cleanWord.length)}
                 </>
               ) : (
