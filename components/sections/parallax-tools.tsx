@@ -149,7 +149,7 @@ export function ParallaxToolsSection() {
                 <img
                   src={tool.logoSrc}
                   alt={tool.name}
-                  className="h-10 md:h-12 w-auto object-contain transition-all duration-300 filter grayscale opacity-75 hover:grayscale-0 hover:opacity-100 dark:grayscale-0 dark:brightness-0 dark:invert dark:opacity-60 dark:hover:opacity-100"
+                  className="h-10 md:h-12 w-auto object-contain transition-all duration-300 opacity-80 hover:opacity-100"
                 />
               </a>
             );
