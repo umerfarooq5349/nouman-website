@@ -89,7 +89,6 @@ function DraggableLogo({
           window.open(tool.link, "_blank", "noopener,noreferrer");
         }
       }}
-      whileHover={{ scale: 1.15 }}
       whileDrag={{ scale: 1.25, zIndex: 50 }}
       className="absolute cursor-grab active:cursor-grabbing z-20 flex items-center justify-center p-3"
       style={{
