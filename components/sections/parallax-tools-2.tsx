@@ -68,7 +68,6 @@ function DraggableLogo({
     pos.transform = "translateX(-50%)";
   }
 
-  // Random float period offsets to make motion look organic
   const floatDuration = 5 + (Math.random() * 4);
 
   return (
@@ -81,7 +80,6 @@ function DraggableLogo({
         isDragging.current = true;
       }}
       onDragEnd={() => {
-        // Reset dragging state after mouse click release window passes
         setTimeout(() => {
           isDragging.current = false;
         }, 50);
@@ -99,7 +97,6 @@ function DraggableLogo({
         opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
       }}
     >
-      {/* Organic float animation wrapper */}
       <motion.div
         animate={{
           y: [0, -8, 0],
@@ -124,6 +121,7 @@ function DraggableLogo({
 
 export function ParallaxToolsSection2() {
   const logoWrapperRef = useRef<HTMLDivElement>(null);
+  const revealEl = useRef<HTMLHeadingElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -131,6 +129,31 @@ export function ParallaxToolsSection2() {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const logoWrapper = logoWrapperRef.current;
+    if (!logoWrapper) return;
+
+    function onScroll() {
+      if (!logoWrapper) return;
+      const rect = logoWrapper.getBoundingClientRect();
+      const wh = window.innerHeight;
+
+      // Calculate vertical scroll progress inside this section
+      const total = logoWrapper.offsetHeight + wh;
+      const scrolled = wh - rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / total));
+
+      // Fade in reveal text at progress > 0.55 (same as original component)
+      if (revealEl.current) {
+        revealEl.current.style.opacity = progress > 0.55 ? "1" : "0";
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -171,27 +194,23 @@ export function ParallaxToolsSection2() {
         }}
       >
         {/* Central Reveal/Intro Text Card (Un-clickable to let drags pass behind it) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10"
-        >
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10">
           <div className="max-w-[70%] text-center">
             <h3
-              className="font-heading font-medium"
+              ref={revealEl}
+              className="font-heading font-medium transition-opacity duration-700 ease-out"
               style={{
                 fontSize: "clamp(1.2rem, 2.8vw, 2.2rem)",
                 lineHeight: 1.4,
                 color: "hsl(var(--primary))",
+                opacity: 0,
               }}
             >
               Powering results for agencies and businesses across the{" "}
               <span className="text-[#FFC64F] font-semibold">US, UK, UAE</span>, and beyond.
             </h3>
           </div>
-        </motion.div>
+        </div>
 
         {/* Draggable Logo Canvas Elements */}
         {tools.map((tool) => (
