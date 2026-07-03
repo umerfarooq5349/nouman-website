@@ -189,7 +189,7 @@ export function ParallaxToolsSection2() {
         }}
       >
         {/* Central Reveal/Intro Text Card (Un-clickable to let drags pass behind it) */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-30">
           <div className="max-w-[70%] text-center">
             <h3
               className="font-heading font-medium text-center text-balance"
