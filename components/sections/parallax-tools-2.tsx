@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface ToolItem {
   name: string;
@@ -43,6 +43,84 @@ const tools: ToolItem[] = [
   { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "88%", left: "20%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
   { name: "Platform 14",   speed: 0.13, opacity: 0.85, fontSize: "1.8rem",  top: "88%", left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affiliate-logos/14.png" },
 ];
+
+function DraggableLogo({ 
+  tool, 
+  isMobile, 
+  dragConstraintsRef 
+}: { 
+  tool: ToolItem; 
+  isMobile: boolean; 
+  dragConstraintsRef: React.RefObject<HTMLDivElement>;
+}) {
+  const isDragging = useRef(false);
+
+  const pos: React.CSSProperties = {};
+  if (tool.top) pos.top = tool.top;
+  if (tool.bottom) pos.bottom = tool.bottom;
+
+  if (isMobile && tool.left) {
+    const val = parseFloat(tool.left);
+    pos.left = `${(val * 0.7 + 15).toFixed(1)}%`;
+    pos.transform = "translateX(-50%)";
+  } else if (tool.left) {
+    pos.left = tool.left;
+    pos.transform = "translateX(-50%)";
+  }
+
+  // Random float period offsets to make motion look organic
+  const floatDuration = 5 + (Math.random() * 4);
+
+  return (
+    <motion.div
+      drag
+      dragConstraints={dragConstraintsRef}
+      dragElastic={0.15}
+      dragMomentum={true}
+      onDragStart={() => {
+        isDragging.current = true;
+      }}
+      onDragEnd={() => {
+        // Reset dragging state after mouse click release window passes
+        setTimeout(() => {
+          isDragging.current = false;
+        }, 50);
+      }}
+      onTap={() => {
+        if (!isDragging.current) {
+          window.open(tool.link, "_blank", "noopener,noreferrer");
+        }
+      }}
+      whileHover={{ scale: 1.15 }}
+      whileDrag={{ scale: 1.25, zIndex: 50 }}
+      className="absolute cursor-grab active:cursor-grabbing z-20 flex items-center justify-center p-3"
+      style={{
+        ...pos,
+        opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
+      }}
+    >
+      {/* Organic float animation wrapper */}
+      <motion.div
+        animate={{
+          y: [0, -8, 0],
+          x: [0, 5, 0],
+        }}
+        transition={{
+          duration: floatDuration,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="flex items-center justify-center select-none pointer-events-none"
+      >
+        <img
+          src={tool.logoSrc}
+          alt={tool.name}
+          className="h-10 md:h-12 w-auto object-contain transition-all duration-300 opacity-80 hover:opacity-100 select-none pointer-events-none"
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export function ParallaxToolsSection2() {
   const logoWrapperRef = useRef<HTMLDivElement>(null);
@@ -116,63 +194,14 @@ export function ParallaxToolsSection2() {
         </motion.div>
 
         {/* Draggable Logo Canvas Elements */}
-        {tools.map((tool, i) => {
-          const pos: React.CSSProperties = {};
-          if (tool.top) pos.top = tool.top;
-          if (tool.bottom) pos.bottom = tool.bottom;
-
-          if (isMobile && tool.left) {
-            const val = parseFloat(tool.left);
-            pos.left = `${(val * 0.7 + 15).toFixed(1)}%`;
-            pos.transform = "translateX(-50%)";
-          } else if (tool.left) {
-            pos.left = tool.left;
-            pos.transform = "translateX(-50%)";
-          }
-
-          // Random float period offsets to make motion look organic
-          const floatDuration = 5 + (i % 4) * 1.2;
-
-          return (
-            <motion.div
-              key={tool.name}
-              drag
-              dragConstraints={logoWrapperRef}
-              dragElastic={0.15}
-              dragMomentum={true}
-              whileHover={{ scale: 1.15 }}
-              whileDrag={{ scale: 1.25, zIndex: 50 }}
-              onTap={() => {
-                window.open(tool.link, "_blank", "noopener,noreferrer");
-              }}
-              className="absolute cursor-grab active:cursor-grabbing z-20 flex items-center justify-center p-3"
-              style={{
-                ...pos,
-                opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
-              }}
-            >
-              {/* Organic float animation wrapper */}
-              <motion.div
-                animate={{
-                  y: [0, -8, 0],
-                  x: [0, 5, 0],
-                }}
-                transition={{
-                  duration: floatDuration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="flex items-center justify-center select-none pointer-events-none"
-              >
-                <img
-                  src={tool.logoSrc}
-                  alt={tool.name}
-                  className="h-10 md:h-12 w-auto object-contain transition-all duration-300 opacity-80 hover:opacity-100 select-none pointer-events-none"
-                />
-              </motion.div>
-            </motion.div>
-          );
-        })}
+        {tools.map((tool) => (
+          <DraggableLogo 
+            key={tool.name} 
+            tool={tool} 
+            isMobile={isMobile} 
+            dragConstraintsRef={logoWrapperRef} 
+          />
+        ))}
       </div>
     </div>
   );
