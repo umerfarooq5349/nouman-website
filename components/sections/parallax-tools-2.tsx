@@ -204,14 +204,14 @@ export function ParallaxToolsSection2() {
               exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
               className="absolute z-40 pointer-events-none select-none"
               style={{
-                top: "14%",
-                left: "20%",
+                top: "8%", // Aligned precisely with Clay logo top
+                left: "15%", // Aligned precisely with Clay logo left
               }}
             >
               <motion.div
                 animate={{
-                  x: [40, 0, 0, 80, 80, 40],
-                  y: [40, 0, 0, 0, 0, 40],
+                  x: [60, 0, 0, 80, 80, 60],
+                  y: [60, 0, 0, 0, 0, 60],
                   scale: [1, 1, 0.8, 0.8, 1, 1],
                   rotate: [0, 0, -10, -10, 0, 0],
                 }}
@@ -223,8 +223,9 @@ export function ParallaxToolsSection2() {
                 }}
                 className="flex flex-col items-center gap-1 text-primary drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
               >
-                <Hand className="w-8 h-8 fill-[#FFC64F] text-[#FFC64F]" />
-                <span className="bg-background/95 border border-[#FFC64F]/30 text-[#FFC64F] text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md">
+                {/* White fill with sage green (#839958) outline pointer */}
+                <Hand className="w-8 h-8 fill-white text-[#839958]" />
+                <span className="bg-background/95 border border-[#839958]/30 text-[#839958] text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md">
                   Drag &amp; Throw
                 </span>
               </motion.div>
