@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Hand } from "lucide-react";
 
 interface ToolItem {
   name: string;
@@ -194,38 +195,38 @@ export function ParallaxToolsSection2() {
           backgroundSize: "24px 24px",
         }}
       >
-        {/* Animated Interaction Guide Overlay */}
+        {/* Animated Interaction Guide Overlay (Cursor Hand Tutorial) */}
         <AnimatePresence>
           {!hasInteracted && (
-             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
-              className="absolute z-40 pointer-events-none select-none flex flex-col items-center"
+              className="absolute z-40 pointer-events-none select-none"
               style={{
-                top: "22%",
+                top: "14%",
                 left: "20%",
               }}
             >
-              {/* Pulsing Target Dot */}
-              <span className="flex h-3.5 w-3.5 mb-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFC64F] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#FFC64F]"></span>
-              </span>
-              
-              {/* Sliding Drag Gesture Card */}
               <motion.div
                 animate={{
-                  x: [0, 20, 0],
+                  x: [40, 0, 0, 80, 80, 40],
+                  y: [40, 0, 0, 0, 0, 40],
+                  scale: [1, 1, 0.8, 0.8, 1, 1],
+                  rotate: [0, 0, -10, -10, 0, 0],
                 }}
                 transition={{
-                  duration: 2.2,
+                  duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut",
+                  times: [0, 0.25, 0.35, 0.7, 0.8, 1],
                 }}
-                className="bg-background/95 backdrop-blur-md border border-[#FFC64F]/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-semibold text-foreground whitespace-nowrap"
+                className="flex flex-col items-center gap-1 text-primary drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
               >
-                <span>👈 Drag &amp; throw logos!</span>
+                <Hand className="w-8 h-8 fill-[#FFC64F] text-[#FFC64F]" />
+                <span className="bg-background/95 border border-[#FFC64F]/30 text-[#FFC64F] text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md">
+                  Drag &amp; Throw
+                </span>
               </motion.div>
             </motion.div>
           )}
