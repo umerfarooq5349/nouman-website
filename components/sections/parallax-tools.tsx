@@ -27,7 +27,7 @@ const tools: ToolItem[] = [
   { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "30%", left: "75%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affiliate-logos/lovable.png" },
   
   { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "55%", left: "20%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affiliate-logos/keap.png" },
-  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "54%", left: "62%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
+  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "68%", left: "65%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affiliate-logos/instantly.png" },
   
   { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "78%", left: "15%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affiliate-logos/hunter.png" },
   { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "80%", left: "75%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affiliate-logos/snov.png" },
@@ -42,87 +42,68 @@ export function ParallaxToolsSection() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
-    const logoWrapper = logoWrapperRef.current;
-    if (!logoWrapper) return;
+    // Parallax logic using standard requestAnimationFrame for butter smooth rendering
+    const handleScroll = () => {
+      if (!logoWrapperRef.current) return;
+      const rect = logoWrapperRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-    function onScroll() {
-      if (!logoWrapper) return;
-      const rect = logoWrapper.getBoundingClientRect();
-      const wh = window.innerHeight;
+      // Calculate progress of scroll through this 150vh wrapper
+      const totalScrollable = rect.height + windowHeight;
+      const currentScroll = windowHeight - rect.top;
+      const rawProgress = currentScroll / totalScrollable;
+      const progress = Math.max(0, Math.min(1, rawProgress));
 
-      // Exact formula from test.html
-      const total = logoWrapper.offsetHeight + wh;
-      const scrolled = wh - rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / total));
-      const range = logoWrapper.offsetHeight;
-
-      toolEls.current.forEach((el, i) => {
+      // 1. Parallax items movement
+      toolEls.current.forEach((el, index) => {
         if (!el) return;
-        const speed = tools[i].speed;
-        const shift = (progress - 0.5) * range * speed * -1;
-        el.style.transform = `translate3d(0px, ${shift.toFixed(2)}px, 0px)`;
+        const tool = tools[index];
+        // Standard data-parallax-speed multiplier (standard delta of 250px)
+        const delta = progress * 250 * tool.speed;
+        el.style.transform = `translate3d(0, ${-delta}px, 0)`;
       });
 
-      // Fade in reveal text at progress > 0.55 (test.html uses 0.55)
+      // 2. Reveal text opacity fade-in at 55% progress
       if (revealEl.current) {
-        revealEl.current.style.opacity = progress > 0.55 ? "1" : "0";
+        if (progress > 0.48) {
+          revealEl.current.style.opacity = "1";
+        } else {
+          revealEl.current.style.opacity = "0";
+        }
       }
-    }
+    };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Run initial trigger
+    handleScroll();
+    
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="bg-background border-t border-border/40 py-16">
-      {/* ── Intro copy wrapper ─── */}
-      <div
-        className="flex flex-col items-center justify-center mb-8"
-        style={{ height: "20vh" }}
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading font-semibold text-center text-balance px-4"
-          style={{
-            fontSize: "clamp(1.6rem, 3vw, 2.5rem)",
-            lineHeight: 1.4,
-            color: "hsl(var(--foreground))",
-            maxWidth: "72%",
-          }}
-        >
-          I build on the world&apos;s most powerful marketing &amp; automation platforms.
-        </motion.h2>
-      </div>
-
-      {/* ── Logo cloud ─── */}
-      <div
-        ref={logoWrapperRef}
-        style={{ height: "80vh", position: "relative", overflow: "hidden" }}
-      >
-        <div
-          style={{
-            position: "relative",
-            width: "90%",
-            height: "100%",
-            margin: "0 auto",
-          }}
-        >
+    <div 
+      ref={logoWrapperRef}
+      className="relative w-full h-[140vh] md:h-[150vh] bg-background flex items-center justify-center"
+    >
+      {/* Sticky container for logos and text */}
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center">
+        
+        {/* Parallax Logo Canvas */}
+        <div className="relative w-full max-w-6xl h-[80vh] mx-auto px-6">
           {tools.map((tool, i) => {
-            const pos: React.CSSProperties = {};
-            if (tool.top) pos.top = tool.top;
-            if (tool.bottom) pos.bottom = tool.bottom;
+            const pos: React.CSSProperties = {
+              position: "absolute",
+              top: tool.top,
+            };
 
+            // Responsive left mappings
             if (isMobile && tool.left) {
               const val = parseFloat(tool.left);
               pos.left = `${(val * 0.7 + 15).toFixed(1)}%`;
@@ -158,7 +139,7 @@ export function ParallaxToolsSection() {
           {/* Reveal text — fades in at 55% progress */}
           <h3
             ref={(el) => { revealEl.current = el; }}
-            className="font-heading font-medium text-center text-balance"
+            className="font-heading font-medium text-center text-balance px-8 py-6 rounded-3xl bg-background/70 backdrop-blur-md border border-border/40 shadow-2xl"
             style={{
               fontSize: "clamp(1.1rem, 2.5vw, 2.1rem)",
               lineHeight: 1.4,
@@ -167,13 +148,15 @@ export function ParallaxToolsSection() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: "72%",
+              width: "82%",
+              maxWidth: "800px",
               zIndex: 10,
               opacity: 0,
               transition: "opacity 0.8s ease",
             }}
           >
-            Powering results for agencies and businesses across the US, UK, UAE, and beyond.
+            Powering results for agencies and businesses across the{" "}
+            <span className="text-[#FFC64F] font-semibold">US, UK, UAE</span>, and beyond.
           </h3>
         </div>
       </div>
