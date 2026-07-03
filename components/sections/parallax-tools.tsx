@@ -13,23 +13,24 @@ interface ToolItem {
   left?: string;
   right?: string;
   link: string;
+  logoSrc: string;
 }
 
 // Placed in distinct Left (left: 2% or 10%) and Right (right: 2% or 10%) zones to keep the center completely empty
 const tools: ToolItem[] = [
-  { name: "Clay",          speed: 0.16, opacity: 1.0,  fontSize: "2.6rem",  top: "8%",  left: "15%", link: "https://clay.com/?via=nouman" },
-  { name: "Apify",         speed: 0.08, opacity: 0.75, fontSize: "1.8rem",  top: "10%", left: "50%", link: "https://apify.com/?fpr=yvcnzu" },
-  { name: "GoHighLevel",   speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "8%",  left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26" },
+  { name: "Clay",          speed: 0.16, opacity: 1.0,  fontSize: "2.6rem",  top: "8%",  left: "15%", link: "https://clay.com/?via=nouman", logoSrc: "/affilate website logos/clay.png" },
+  { name: "Apify",         speed: 0.08, opacity: 0.75, fontSize: "1.8rem",  top: "10%", left: "50%", link: "https://apify.com/?fpr=yvcnzu", logoSrc: "/affilate website logos/apify.png" },
+  { name: "GoHighLevel",   speed: 0.20, opacity: 1.0,  fontSize: "2.8rem",  top: "8%",  left: "80%", link: "https://www.gohighlevel.com/634876b5?fp_ref=ignitto26", logoSrc: "/affilate website logos/Gohoghlevel.png" },
   
-  { name: "Malcare",       speed: 0.07, opacity: 0.55, fontSize: "1.4rem",  top: "30%", left: "8%",  link: "https://malcare.com/?src=F0F396" },
-  { name: "Make.com",      speed: 0.14, opacity: 1.0,  fontSize: "2.3rem",  top: "32%", left: "42%", link: "https://www.make.com/en/register?pc=ignitto" },
-  { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "30%", left: "75%", link: "https://lovable.dev/?via=muhammad-nouman" },
+  { name: "Malcare",       speed: 0.07, opacity: 0.55, fontSize: "1.4rem",  top: "30%", left: "8%",  link: "https://malcare.com/?src=F0F396", logoSrc: "/affilate website logos/malecare.png" },
+  { name: "Make.com",      speed: 0.14, opacity: 1.0,  fontSize: "2.3rem",  top: "32%", left: "42%", link: "https://www.make.com/en/register?pc=ignitto", logoSrc: "/affilate website logos/make.png" },
+  { name: "Lovable.dev",   speed: 0.10, opacity: 0.80, fontSize: "2.0rem",  top: "30%", left: "75%", link: "https://lovable.dev/?via=muhammad-nouman", logoSrc: "/affilate website logos/lovable.png" },
   
-  { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "55%", left: "20%", link: "https://get.keap.com/btccdnpsegsv" },
-  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "54%", left: "62%", link: "https://instantly.ai/?via=muhammad-nouman" },
+  { name: "Keap",          speed: 0.05, opacity: 0.60, fontSize: "1.5rem",  top: "55%", left: "20%", link: "https://get.keap.com/btccdnpsegsv", logoSrc: "/affilate website logos/keap.png" },
+  { name: "Instantly.ai",  speed: 0.12, opacity: 1.0,  fontSize: "2.4rem",  top: "54%", left: "62%", link: "https://instantly.ai/?via=muhammad-nouman", logoSrc: "/affilate website logos/instantly.png" },
   
-  { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "78%", left: "15%", link: "https://hunter.io/?via=muhammad" },
-  { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "80%", left: "75%", link: "https://snov.io/?fp_ref=muhammad97" },
+  { name: "Hunter.io",     speed: 0.09, opacity: 0.75, fontSize: "1.9rem",  top: "78%", left: "15%", link: "https://hunter.io/?via=muhammad", logoSrc: "/affilate website logos/hunter.png" },
+  { name: "Snov.io",       speed: 0.11, opacity: 0.75, fontSize: "2.0rem",  top: "80%", left: "75%", link: "https://snov.io/?fp_ref=muhammad97", logoSrc: "/affilate website logos/snov.png" },
 ];
 
 export function ParallaxToolsSection() {
@@ -131,8 +132,6 @@ export function ParallaxToolsSection() {
               pos.transform = "translateX(-50%)"; // Center aligned anchor
             }
 
-            const isGHL = tool.name.toLowerCase() === "gohighlevel";
-
             return (
               <a
                 key={tool.name}
@@ -140,25 +139,18 @@ export function ParallaxToolsSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 ref={(el) => { toolEls.current[i] = el; }}
-                className="parallax-item transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:text-[#519CAB] cursor-pointer hover:drop-shadow-[0_0_15px_rgba(81,156,171,0.4)]"
+                className="parallax-item transition-all duration-300 hover:scale-110 hover:-translate-y-1 cursor-pointer flex items-center justify-center"
                 style={{
                   ...pos,
                   opacity: isMobile ? tool.opacity * 0.45 : tool.opacity,
-                  fontSize: `clamp(0.65rem, 2.2vw, ${tool.fontSize})`,
-                  color: "hsl(var(--foreground) / 0.85)",
-                  textDecoration: "none",
                   zIndex: 20,
                 }}
               >
-                {isGHL ? (
-                  <>
-                    <span className="text-[#FFC64F]">Go</span>
-                    <span className="text-[#519CAB]">High</span>
-                    <span className="text-[#839958]">Level</span>
-                  </>
-                ) : (
-                  tool.name
-                )}
+                <img
+                  src={tool.logoSrc}
+                  alt={tool.name}
+                  className="h-10 md:h-12 w-auto object-contain transition-all duration-300 filter grayscale opacity-75 hover:grayscale-0 hover:opacity-100 dark:grayscale-0 dark:brightness-0 dark:invert dark:opacity-60 dark:hover:opacity-100"
+                />
               </a>
             );
           })}
