@@ -1030,18 +1030,61 @@ export const FlickeringFooter = () => {
                         <Icons.gdprDark className="size-12" />
                     </div>
                 </div>
-                <div className="pt-5 w-full md:w-1/2">
-                    <div className="flex flex-col items-center justify-center md:flex-row md:items-start md:justify-end gap-x-16 gap-y-8 lg:pl-10 text-center md:text-left">
+                <div className="pt-5 w-full md:w-auto">
+                    <div className="flex flex-wrap justify-center md:justify-end gap-x-12 gap-y-10 text-center md:text-left">
+
                         {/* Navigate Column */}
-                        <ul className="flex flex-col items-center md:items-start gap-y-2">
-                            <li className="mb-2 text-sm font-semibold text-primary">
-                                Navigate
-                            </li>
+                        <ul className="flex flex-col items-center md:items-start gap-y-2 min-w-[100px]">
+                            <li className="mb-2 text-sm font-semibold text-primary">Navigate</li>
                             {nav.map((item) => (
-                                <li
-                                    key={item.href}
-                                    className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
-                                >
+                                <li key={item.href} className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                    <Link href={item.href}>{item.label}</Link>
+                                    <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                        <ChevronRightIcon className="h-4 w-4" />
+                                    </div>
+                                </li>
+                            ))}
+                            <li className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="/portfolio">Portfolio</Link>
+                                <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                    <ChevronRightIcon className="h-4 w-4" />
+                                </div>
+                            </li>
+                            <li className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="/testimonials">Testimonials</Link>
+                                <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                    <ChevronRightIcon className="h-4 w-4" />
+                                </div>
+                            </li>
+                            <li className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="/about-muhammad-nouman">About Nouman</Link>
+                                <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                    <ChevronRightIcon className="h-4 w-4" />
+                                </div>
+                            </li>
+                            <li className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="/book-a-strategy-session">Book a Call</Link>
+                                <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                    <ChevronRightIcon className="h-4 w-4" />
+                                </div>
+                            </li>
+                        </ul>
+
+                        {/* Services & Migrations Column */}
+                        <ul className="flex flex-col items-center md:items-start gap-y-2 min-w-[140px]">
+                            <li className="mb-2 text-sm font-semibold text-primary">Services</li>
+                            {[
+                                { label: "GHL Training", href: "/gohighlevel-training" },
+                                { label: "Certified Expert", href: "/gohighlevel-certified-expert" },
+                                { label: "Fractional CMO", href: "/fractional-cmo" },
+                                { label: "Hourly Consulting", href: "/hourly-rate-for-gohighlevel" },
+                                { label: "System Migration", href: "/migrate-your-existing-system-to-gohighlevel" },
+                                { label: "HubSpot → GHL", href: "/hubspot-to-gohighlevel" },
+                                { label: "Kajabi → GHL", href: "/kajabi-to-gohighlevel" },
+                                { label: "Keap → GHL", href: "/keap-to-gohighlevel" },
+                                { label: "Salesforce → GHL", href: "/salesforce-to-gohighlevel" },
+                            ].map((item) => (
+                                <li key={item.href} className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
                                     <Link href={item.href}>{item.label}</Link>
                                     <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
                                         <ChevronRightIcon className="h-4 w-4" />
@@ -1050,25 +1093,35 @@ export const FlickeringFooter = () => {
                             ))}
                         </ul>
 
-                        {/* Elsewhere Column */}
-                        <ul className="flex flex-col items-center md:items-start gap-y-2">
-                            <li className="mb-2 text-sm font-semibold text-primary">
-                                Elsewhere
-                            </li>
+                        {/* Resources & Legal Column */}
+                        <ul className="flex flex-col items-center md:items-start gap-y-2 min-w-[110px]">
+                            <li className="mb-2 text-sm font-semibold text-primary">Resources</li>
+                            {[
+                                { label: "Articles", href: "/articles" },
+                                { label: "Best Tools", href: "/best-tools" },
+                                { label: "Contact", href: "/contact-muhammad-nouman" },
+                                { label: "Refund Policy", href: "/refund-policy" },
+                                { label: "Privacy Policy", href: "/privacy-policy" },
+                                { label: "Terms & Conditions", href: "/terms-conditions" },
+                            ].map((item) => (
+                                <li key={item.href} className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                    <Link href={item.href}>{item.label}</Link>
+                                    <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+                                        <ChevronRightIcon className="h-4 w-4" />
+                                    </div>
+                                </li>
+                            ))}
+                            <li className="mt-4 mb-2 text-sm font-semibold text-primary">Elsewhere</li>
                             {socials.map((s) => (
-                                <li
-                                    key={s.label}
-                                    className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors"
-                                >
-                                    <a href={s.href} target="_blank" rel="noopener noreferrer">
-                                        {s.label}
-                                    </a>
+                                <li key={s.label} className="group inline-flex cursor-pointer items-center justify-center md:justify-start gap-1 text-[15px]/snug text-muted-foreground hover:text-primary transition-colors">
+                                    <a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
                                     <div className="hidden md:flex size-4 items-center justify-center border border-border rounded translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
                                         <ChevronRightIcon className="h-4 w-4" />
                                     </div>
                                 </li>
                             ))}
                         </ul>
+
                     </div>
                 </div>
             </div>
